@@ -1,0 +1,25 @@
+{
+  "name": "TKU-WiFi-APN",
+  "version": "0.0.1",
+  "private": true,
+  "scripts": {
+    "start": "node app.js"
+  },
+  "dependencies": {
+    "express": "4.*",
+    "express-session": "*",
+    "helmet":"",
+	  "morgan": "*",
+    "cookie-parser": "*",
+    "body-parser": "*",
+    "method-override":"",
+    "morgan":"",
+    "ejs": "*",
+	  "apn":"",
+    "mongoose" : "3.8.13",
+    "connect-mongo" : "*",
+  	"mongodb": "",
+	  "csurf":"",
+    "stylus": "*"
+ }
+}
