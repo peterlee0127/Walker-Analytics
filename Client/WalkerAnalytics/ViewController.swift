@@ -14,13 +14,24 @@ import QuartzCore
 import AVFoundation
 
 class ViewController: UIViewController,CLLocationManagerDelegate,MKMapViewDelegate {
+    // Motion and Location
     var locationManager:CLLocationManager?
+    var motionManager:MotionManager?
+    
+    //IBOutlet
     @IBOutlet var accuracyLabel:UILabel?
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         initLocationManaer()
+        initMotionManager()
+        
         accuracyLabel!.adjustsFontSizeToFitWidth = true
         // Do any additional setup after loading the view, typically from a nib.
+    }
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
+        
     }
     func initLocationManaer(){
         locationManager = CLLocationManager()
@@ -30,6 +41,11 @@ class ViewController: UIViewController,CLLocationManagerDelegate,MKMapViewDelega
         locationManager!.requestAlwaysAuthorization()
         locationManager!.activityType = CLActivityType.Fitness
         locationManager!.distanceFilter = kCLDistanceFilterNone
+    }
+    func initMotionManager(){
+       motionManager = MotionManager.sharedInstance
+       motionManager!.locationManager = locationManager!
+       motionManager!.startTrackingMotion()
     }
     func locationManager(manager: CLLocationManager!, didChangeAuthorizationStatus status: CLAuthorizationStatus) {
         if (status==CLAuthorizationStatus.Authorized || status==CLAuthorizationStatus.AuthorizedWhenInUse)  {
@@ -43,13 +59,10 @@ class ViewController: UIViewController,CLLocationManagerDelegate,MKMapViewDelega
     func locationManager(manager: CLLocationManager!, didUpdateLocations locations: [AnyObject]!) {
         var location:CLLocation = locations.first as CLLocation
         accuracyLabel!.text = "horizontal:\(location.horizontalAccuracy)\t vertical:\(location.verticalAccuracy)"
-        if(location.horizontalAccuracy<10 || location.verticalAccuracy<10){
-            //Accuracy
-            
-            
-            
-            
-        }
+        if(location.horizontalAccuracy<20 || location.verticalAccuracy<15){
+            //Accuracy 精確度
+  
+        }  // accuracy end
         
     }
     override func didReceiveMemoryWarning() {

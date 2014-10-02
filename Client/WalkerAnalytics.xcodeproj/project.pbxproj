@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		D0B7FD2E19DDBD6A00F1E3F3 /* CoreMotion.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D0B7FD2D19DDBD6A00F1E3F3 /* CoreMotion.framework */; };
+		D0B7FD3019DDBD8000F1E3F3 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D0B7FD2F19DDBD8000F1E3F3 /* CoreLocation.framework */; };
 		D0C5A2EE19DD397900F407FA /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0C5A2ED19DD397900F407FA /* AppDelegate.swift */; };
 		D0C5A2F019DD397900F407FA /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0C5A2EF19DD397900F407FA /* ViewController.swift */; };
 		D0C5A2F519DD397900F407FA /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D0C5A2F419DD397900F407FA /* Images.xcassets */; };
@@ -15,6 +17,7 @@
 		D0C5A30E19DD39F000F407FA /* ViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D0C5A30D19DD39F000F407FA /* ViewController.xib */; };
 		D0C5A31119DD3A2700F407FA /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0C5A30F19DD3A2700F407FA /* MainViewController.swift */; };
 		D0C5A31219DD3A2700F407FA /* MainViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D0C5A31019DD3A2700F407FA /* MainViewController.xib */; };
+		D0D2409719DD55E10029F325 /* MotionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0D2409619DD55E10029F325 /* MotionManager.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -28,6 +31,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		D0B7FD2D19DDBD6A00F1E3F3 /* CoreMotion.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMotion.framework; path = System/Library/Frameworks/CoreMotion.framework; sourceTree = SDKROOT; };
+		D0B7FD2F19DDBD8000F1E3F3 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
 		D0C5A2E819DD397900F407FA /* WalkerAnalytics.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = WalkerAnalytics.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D0C5A2EC19DD397900F407FA /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		D0C5A2ED19DD397900F407FA /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -40,6 +45,7 @@
 		D0C5A30D19DD39F000F407FA /* ViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ViewController.xib; sourceTree = "<group>"; };
 		D0C5A30F19DD3A2700F407FA /* MainViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
 		D0C5A31019DD3A2700F407FA /* MainViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MainViewController.xib; sourceTree = "<group>"; };
+		D0D2409619DD55E10029F325 /* MotionManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MotionManager.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -47,6 +53,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D0B7FD3019DDBD8000F1E3F3 /* CoreLocation.framework in Frameworks */,
+				D0B7FD2E19DDBD6A00F1E3F3 /* CoreMotion.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -67,6 +75,7 @@
 				D0C5A31019DD3A2700F407FA /* MainViewController.xib */,
 				D0C5A2EF19DD397900F407FA /* ViewController.swift */,
 				D0C5A30D19DD39F000F407FA /* ViewController.xib */,
+				D0D2409619DD55E10029F325 /* MotionManager.swift */,
 			);
 			name = ViewController;
 			sourceTree = "<group>";
@@ -74,6 +83,8 @@
 		D0C5A2DF19DD397900F407FA = {
 			isa = PBXGroup;
 			children = (
+				D0B7FD2F19DDBD8000F1E3F3 /* CoreLocation.framework */,
+				D0B7FD2D19DDBD6A00F1E3F3 /* CoreMotion.framework */,
 				D0C5A2EA19DD397900F407FA /* WalkerAnalytics */,
 				D0C5A30019DD397900F407FA /* WalkerAnalyticsTests */,
 				D0C5A2E919DD397900F407FA /* Products */,
@@ -235,6 +246,7 @@
 				D0C5A31119DD3A2700F407FA /* MainViewController.swift in Sources */,
 				D0C5A2F019DD397900F407FA /* ViewController.swift in Sources */,
 				D0C5A2EE19DD397900F407FA /* AppDelegate.swift in Sources */,
+				D0D2409719DD55E10029F325 /* MotionManager.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
