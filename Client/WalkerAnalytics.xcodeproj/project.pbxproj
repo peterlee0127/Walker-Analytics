@@ -7,30 +7,26 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		D09DC31519DE4712001B7841 /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D09DC31419DE4712001B7841 /* NetworkManager.swift */; };
 		D0B7FD2E19DDBD6A00F1E3F3 /* CoreMotion.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D0B7FD2D19DDBD6A00F1E3F3 /* CoreMotion.framework */; };
 		D0B7FD3019DDBD8000F1E3F3 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D0B7FD2F19DDBD8000F1E3F3 /* CoreLocation.framework */; };
 		D0C5A2EE19DD397900F407FA /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0C5A2ED19DD397900F407FA /* AppDelegate.swift */; };
 		D0C5A2F019DD397900F407FA /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0C5A2EF19DD397900F407FA /* ViewController.swift */; };
 		D0C5A2F519DD397900F407FA /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D0C5A2F419DD397900F407FA /* Images.xcassets */; };
 		D0C5A2F819DD397900F407FA /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = D0C5A2F619DD397900F407FA /* LaunchScreen.xib */; };
-		D0C5A30419DD397900F407FA /* WalkerAnalyticsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0C5A30319DD397900F407FA /* WalkerAnalyticsTests.swift */; };
 		D0C5A30E19DD39F000F407FA /* ViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D0C5A30D19DD39F000F407FA /* ViewController.xib */; };
 		D0C5A31119DD3A2700F407FA /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0C5A30F19DD3A2700F407FA /* MainViewController.swift */; };
 		D0C5A31219DD3A2700F407FA /* MainViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D0C5A31019DD3A2700F407FA /* MainViewController.xib */; };
 		D0D2409719DD55E10029F325 /* MotionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0D2409619DD55E10029F325 /* MotionManager.swift */; };
+		D167200B980FDD750532F9BC /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A2A2F8F706BA8613D3D9DC4C /* libPods.a */; };
 /* End PBXBuildFile section */
 
-/* Begin PBXContainerItemProxy section */
-		D0C5A2FE19DD397900F407FA /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = D0C5A2E019DD397900F407FA /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = D0C5A2E719DD397900F407FA;
-			remoteInfo = WalkerAnalytics;
-		};
-/* End PBXContainerItemProxy section */
-
 /* Begin PBXFileReference section */
+		48F0FBCC5B9150D034BCC4E5 /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
+		A2A2F8F706BA8613D3D9DC4C /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		C1F55BD0B14EAD441821AA97 /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
+		D01A4A1D19DE496800539D43 /* Bridge-Header.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Bridge-Header.h"; sourceTree = "<group>"; };
+		D09DC31419DE4712001B7841 /* NetworkManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
 		D0B7FD2D19DDBD6A00F1E3F3 /* CoreMotion.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMotion.framework; path = System/Library/Frameworks/CoreMotion.framework; sourceTree = SDKROOT; };
 		D0B7FD2F19DDBD8000F1E3F3 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
 		D0C5A2E819DD397900F407FA /* WalkerAnalytics.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = WalkerAnalytics.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -39,9 +35,6 @@
 		D0C5A2EF19DD397900F407FA /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		D0C5A2F419DD397900F407FA /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		D0C5A2F719DD397900F407FA /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
-		D0C5A2FD19DD397900F407FA /* WalkerAnalyticsTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = WalkerAnalyticsTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		D0C5A30219DD397900F407FA /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		D0C5A30319DD397900F407FA /* WalkerAnalyticsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalkerAnalyticsTests.swift; sourceTree = "<group>"; };
 		D0C5A30D19DD39F000F407FA /* ViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ViewController.xib; sourceTree = "<group>"; };
 		D0C5A30F19DD3A2700F407FA /* MainViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
 		D0C5A31019DD3A2700F407FA /* MainViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MainViewController.xib; sourceTree = "<group>"; };
@@ -55,19 +48,22 @@
 			files = (
 				D0B7FD3019DDBD8000F1E3F3 /* CoreLocation.framework in Frameworks */,
 				D0B7FD2E19DDBD6A00F1E3F3 /* CoreMotion.framework in Frameworks */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		D0C5A2FA19DD397900F407FA /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
+				D167200B980FDD750532F9BC /* libPods.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		8498471218ADE89547FC5E56 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				C1F55BD0B14EAD441821AA97 /* Pods.debug.xcconfig */,
+				48F0FBCC5B9150D034BCC4E5 /* Pods.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
 		D05B481519DD3AF200E997A3 /* ViewController */ = {
 			isa = PBXGroup;
 			children = (
@@ -75,19 +71,26 @@
 				D0C5A31019DD3A2700F407FA /* MainViewController.xib */,
 				D0C5A2EF19DD397900F407FA /* ViewController.swift */,
 				D0C5A30D19DD39F000F407FA /* ViewController.xib */,
-				D0D2409619DD55E10029F325 /* MotionManager.swift */,
 			);
 			name = ViewController;
+			sourceTree = "<group>";
+		};
+		D0BAF32A19DEB05700C12FE2 /* Manager */ = {
+			isa = PBXGroup;
+			children = (
+				D0D2409619DD55E10029F325 /* MotionManager.swift */,
+				D09DC31419DE4712001B7841 /* NetworkManager.swift */,
+			);
+			name = Manager;
 			sourceTree = "<group>";
 		};
 		D0C5A2DF19DD397900F407FA = {
 			isa = PBXGroup;
 			children = (
-				D0B7FD2F19DDBD8000F1E3F3 /* CoreLocation.framework */,
-				D0B7FD2D19DDBD6A00F1E3F3 /* CoreMotion.framework */,
 				D0C5A2EA19DD397900F407FA /* WalkerAnalytics */,
-				D0C5A30019DD397900F407FA /* WalkerAnalyticsTests */,
 				D0C5A2E919DD397900F407FA /* Products */,
+				8498471218ADE89547FC5E56 /* Pods */,
+				D853825A6A41CA1258220DBE /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -95,7 +98,6 @@
 			isa = PBXGroup;
 			children = (
 				D0C5A2E819DD397900F407FA /* WalkerAnalytics.app */,
-				D0C5A2FD19DD397900F407FA /* WalkerAnalyticsTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -104,9 +106,8 @@
 			isa = PBXGroup;
 			children = (
 				D0C5A2ED19DD397900F407FA /* AppDelegate.swift */,
+				D0BAF32A19DEB05700C12FE2 /* Manager */,
 				D05B481519DD3AF200E997A3 /* ViewController */,
-				D0C5A2F419DD397900F407FA /* Images.xcassets */,
-				D0C5A2F619DD397900F407FA /* LaunchScreen.xib */,
 				D0C5A2EB19DD397900F407FA /* Supporting Files */,
 			);
 			path = WalkerAnalytics;
@@ -115,26 +116,22 @@
 		D0C5A2EB19DD397900F407FA /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				D0C5A2F419DD397900F407FA /* Images.xcassets */,
+				D0C5A2F619DD397900F407FA /* LaunchScreen.xib */,
+				D01A4A1D19DE496800539D43 /* Bridge-Header.h */,
 				D0C5A2EC19DD397900F407FA /* Info.plist */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
-		D0C5A30019DD397900F407FA /* WalkerAnalyticsTests */ = {
+		D853825A6A41CA1258220DBE /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				D0C5A30319DD397900F407FA /* WalkerAnalyticsTests.swift */,
-				D0C5A30119DD397900F407FA /* Supporting Files */,
+				D0B7FD2F19DDBD8000F1E3F3 /* CoreLocation.framework */,
+				D0B7FD2D19DDBD6A00F1E3F3 /* CoreMotion.framework */,
+				A2A2F8F706BA8613D3D9DC4C /* libPods.a */,
 			);
-			path = WalkerAnalyticsTests;
-			sourceTree = "<group>";
-		};
-		D0C5A30119DD397900F407FA /* Supporting Files */ = {
-			isa = PBXGroup;
-			children = (
-				D0C5A30219DD397900F407FA /* Info.plist */,
-			);
-			name = "Supporting Files";
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -144,9 +141,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = D0C5A30719DD397900F407FA /* Build configuration list for PBXNativeTarget "WalkerAnalytics" */;
 			buildPhases = (
+				E57AC294A0C01A36D30C2538 /* Check Pods Manifest.lock */,
 				D0C5A2E419DD397900F407FA /* Sources */,
 				D0C5A2E519DD397900F407FA /* Frameworks */,
 				D0C5A2E619DD397900F407FA /* Resources */,
+				67FE0491AD84A8CE93DD4531 /* Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -156,24 +155,6 @@
 			productName = WalkerAnalytics;
 			productReference = D0C5A2E819DD397900F407FA /* WalkerAnalytics.app */;
 			productType = "com.apple.product-type.application";
-		};
-		D0C5A2FC19DD397900F407FA /* WalkerAnalyticsTests */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = D0C5A30A19DD397900F407FA /* Build configuration list for PBXNativeTarget "WalkerAnalyticsTests" */;
-			buildPhases = (
-				D0C5A2F919DD397900F407FA /* Sources */,
-				D0C5A2FA19DD397900F407FA /* Frameworks */,
-				D0C5A2FB19DD397900F407FA /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				D0C5A2FF19DD397900F407FA /* PBXTargetDependency */,
-			);
-			name = WalkerAnalyticsTests;
-			productName = WalkerAnalyticsTests;
-			productReference = D0C5A2FD19DD397900F407FA /* WalkerAnalyticsTests.xctest */;
-			productType = "com.apple.product-type.bundle.unit-test";
 		};
 /* End PBXNativeTarget section */
 
@@ -192,10 +173,6 @@
 							};
 						};
 					};
-					D0C5A2FC19DD397900F407FA = {
-						CreatedOnToolsVersion = 6.1;
-						TestTargetID = D0C5A2E719DD397900F407FA;
-					};
 				};
 			};
 			buildConfigurationList = D0C5A2E319DD397900F407FA /* Build configuration list for PBXProject "WalkerAnalytics" */;
@@ -212,7 +189,6 @@
 			projectRoot = "";
 			targets = (
 				D0C5A2E719DD397900F407FA /* WalkerAnalytics */,
-				D0C5A2FC19DD397900F407FA /* WalkerAnalyticsTests */,
 			);
 		};
 /* End PBXProject section */
@@ -229,14 +205,40 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		D0C5A2FB19DD397900F407FA /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		67FE0491AD84A8CE93DD4531 /* Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
+			inputPaths = (
+			);
+			name = "Copy Pods Resources";
+			outputPaths = (
+			);
 			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods/Pods-resources.sh\"\n";
+			showEnvVarsInLog = 0;
 		};
-/* End PBXResourcesBuildPhase section */
+		E57AC294A0C01A36D30C2538 /* Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		D0C5A2E419DD397900F407FA /* Sources */ = {
@@ -245,28 +247,13 @@
 			files = (
 				D0C5A31119DD3A2700F407FA /* MainViewController.swift in Sources */,
 				D0C5A2F019DD397900F407FA /* ViewController.swift in Sources */,
+				D09DC31519DE4712001B7841 /* NetworkManager.swift in Sources */,
 				D0C5A2EE19DD397900F407FA /* AppDelegate.swift in Sources */,
 				D0D2409719DD55E10029F325 /* MotionManager.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		D0C5A2F919DD397900F407FA /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				D0C5A30419DD397900F407FA /* WalkerAnalyticsTests.swift in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXSourcesBuildPhase section */
-
-/* Begin PBXTargetDependency section */
-		D0C5A2FF19DD397900F407FA /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = D0C5A2E719DD397900F407FA /* WalkerAnalytics */;
-			targetProxy = D0C5A2FE19DD397900F407FA /* PBXContainerItemProxy */;
-		};
-/* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
 		D0C5A2F619DD397900F407FA /* LaunchScreen.xib */ = {
@@ -318,6 +305,7 @@
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
+				SWIFT_OBJC_BRIDGING_HEADER = "WalkerAnalytics/Bridge-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 			};
 			name = Debug;
@@ -353,12 +341,14 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
+				SWIFT_OBJC_BRIDGING_HEADER = "WalkerAnalytics/Bridge-Header.h";
 				VALIDATE_PRODUCT = YES;
 			};
 			name = Release;
 		};
 		D0C5A30819DD397900F407FA /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = C1F55BD0B14EAD441821AA97 /* Pods.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_FILE = WalkerAnalytics/Info.plist;
@@ -370,46 +360,13 @@
 		};
 		D0C5A30919DD397900F407FA /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 48F0FBCC5B9150D034BCC4E5 /* Pods.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_FILE = WalkerAnalytics/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-			};
-			name = Release;
-		};
-		D0C5A30B19DD397900F407FA /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				BUNDLE_LOADER = "$(TEST_HOST)";
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(SDKROOT)/Developer/Library/Frameworks",
-					"$(inherited)",
-				);
-				GCC_PREPROCESSOR_DEFINITIONS = (
-					"DEBUG=1",
-					"$(inherited)",
-				);
-				INFOPLIST_FILE = WalkerAnalyticsTests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/WalkerAnalytics.app/WalkerAnalytics";
-			};
-			name = Debug;
-		};
-		D0C5A30C19DD397900F407FA /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				BUNDLE_LOADER = "$(TEST_HOST)";
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(SDKROOT)/Developer/Library/Frameworks",
-					"$(inherited)",
-				);
-				INFOPLIST_FILE = WalkerAnalyticsTests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/WalkerAnalytics.app/WalkerAnalytics";
 			};
 			name = Release;
 		};
@@ -430,15 +387,6 @@
 			buildConfigurations = (
 				D0C5A30819DD397900F407FA /* Debug */,
 				D0C5A30919DD397900F407FA /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		D0C5A30A19DD397900F407FA /* Build configuration list for PBXNativeTarget "WalkerAnalyticsTests" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				D0C5A30B19DD397900F407FA /* Debug */,
-				D0C5A30C19DD397900F407FA /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

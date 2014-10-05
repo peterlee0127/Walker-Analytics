@@ -32,8 +32,7 @@ app.post('/saveMotionData',function(req,res){
 			model.MotionData.create(
 			{
 				activity: req.body.activity,
-				starttime: req.body.starttime,
-				endtime:req.body.endtime,
+				time: req.body.time,
 				verticalAccuracy:req.body.verticalAccuracy,
 				horizontalAccuracy:req.body.horizontalAccuracy,
 				distance:req.body.distance,

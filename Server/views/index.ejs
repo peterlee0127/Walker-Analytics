@@ -23,11 +23,11 @@
 		<thead>
 				 <tr>
       		<th class="col-md-1">activity</th>
-					<th class="col-md-2">time</th>
+					<th class="col-md-1">time</th>
 					<th class="col-md-1">distance</th>
 					<th class="col-md-1">altitude</th>
-					<th class="col-md-1">verticalAccuracy</th>
 					<th class="col-md-1">horizontalAccuracy</th>
+					<th class="col-md-1">verticalAccuracy</th>
 					<th class="col-md-1">steps</th>
 					<th class="col-md-1">floorsAscended</th>
 					<th class="col-md-1">floorsDescended</th>
@@ -38,11 +38,11 @@
 		<tbody>
 				<tr ng-repeat="data in MotionData">
 						<td ng-click="deleteData(data._id)">{{ data.activity }}</td>
-						<td>{{ data.starttime | date:'yyyy-MM/d HH:mm:ss' }}~{{ data.endtime | date:'yyyy-MM/d HH:mm:ss' }}</td>
+						<td>{{ data.time | date:'yyyy-MM/d HH:mm:ss' }}</td>
 						<td>{{ data.distance }}</td>
 						<td>{{ data.altitude }}</td>
-						<td>{{ data.verticalAccuracy }}</td>
 						<td>{{ data.horizontalAccuracy }}</td>
+						<td>{{ data.verticalAccuracy }}</td>
 						<td>{{ data.steps }}</td>
 						<td>{{ data.floorsAscended }}</td>
 						<td>{{ data.floorsDescended }}</td>
@@ -61,7 +61,7 @@
 				var addr = [];
 				addr.push(raw.latitude);
 				addr.push(raw.longitude);
-				var place = { "text":raw.activity,"addr": addr  };
+				var place = { "text":raw.time+" "+raw.activity+" hor:"+raw.horizontalAccuracy,"addr": addr  };
 				placeArr.push(place);
 			});
 

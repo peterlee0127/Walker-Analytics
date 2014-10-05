@@ -4,8 +4,7 @@ mongoose.connect('mongodb://localhost:27017/SafeWalker');
 
 exports.MotionData = mongoose.model('Admin',{
 		'activity'	:String,
-		'starttime'	 :String,
-		'endtime'    :String,
+		'time'	 :String,
 		'horizontalAccuracy' :Number,
 		'verticalAccuracy': Number,
 		'distance'	:Number,
