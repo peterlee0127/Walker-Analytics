@@ -7,6 +7,7 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="ViewController" customModule="WalkerAnalytics" customModuleProvider="target">
             <connections>
                 <outlet property="accuracyLabel" destination="Db3-xJ-lgd" id="Epm-gc-vig"/>
+                <outlet property="altitudeLabel" destination="Ffi-rt-Zoo" id="RXd-gh-YvE"/>
                 <outlet property="view" destination="iN0-l3-epB" id="TZa-ex-axk"/>
             </connections>
         </placeholder>
@@ -24,12 +25,24 @@
                     <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                     <nil key="highlightedColor"/>
                 </label>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Altitude change:0m    0" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ffi-rt-Zoo">
+                    <rect key="frame" x="45" y="130" width="510" height="27"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="27" id="4Hy-gf-FX4"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                    <nil key="highlightedColor"/>
+                </label>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
             <constraints>
+                <constraint firstItem="Ffi-rt-Zoo" firstAttribute="top" secondItem="Db3-xJ-lgd" secondAttribute="bottom" constant="38" id="0wX-Js-Tc4"/>
+                <constraint firstItem="Ffi-rt-Zoo" firstAttribute="centerX" secondItem="Db3-xJ-lgd" secondAttribute="centerX" id="3ry-XG-GKN"/>
                 <constraint firstItem="Db3-xJ-lgd" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="19" id="A2r-jL-GpQ"/>
                 <constraint firstItem="Db3-xJ-lgd" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="44" id="Kmg-wU-BeL"/>
                 <constraint firstItem="Db3-xJ-lgd" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="Z24-gz-Kcw"/>
+                <constraint firstItem="Ffi-rt-Zoo" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="45" id="kLb-US-dML"/>
             </constraints>
         </view>
     </objects>
