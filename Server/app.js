@@ -35,7 +35,7 @@ app.post('/saveMotionData',function(req,res){
 				time: req.body.time,
 				verticalAccuracy:req.body.verticalAccuracy,
 				horizontalAccuracy:req.body.horizontalAccuracy,
-				distance:req.body.distance,
+				altitudeLog:req.body.altitudeLog,
 				altitude:req.body.altitude,
 				steps:req.body.steps,
 				floorsAscended:req.body.floorsAscended,
@@ -56,7 +56,7 @@ app.post('/saveMotionData',function(req,res){
 
 
 app.get('/' ,function(req,res){
-		res.render('index',{ title:"Safe Walker"});
+		res.render('index',{ title:"Walker Analytics"});
 });
 
 

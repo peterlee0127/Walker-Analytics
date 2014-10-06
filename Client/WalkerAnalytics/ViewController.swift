@@ -20,7 +20,7 @@ class ViewController: UIViewController,CLLocationManagerDelegate,MKMapViewDelega
     var altitudeChangeTimes:Int?
     //IBOutlet
     @IBOutlet var accuracyLabel:UILabel?
-    @IBOutlet var altitudeLabel:UILabel?
+    @IBOutlet var altitudeTextView:UITextView?
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -29,7 +29,6 @@ class ViewController: UIViewController,CLLocationManagerDelegate,MKMapViewDelega
         initMotionManager()
         
         accuracyLabel!.adjustsFontSizeToFitWidth = true
-        altitudeLabel!.adjustsFontSizeToFitWidth = true
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "altitudeChange:", name: "kAltitudeChange", object: nil)
         // Do any additional setup after loading the view, typically from a nib.
     }
@@ -40,7 +39,7 @@ class ViewController: UIViewController,CLLocationManagerDelegate,MKMapViewDelega
     func altitudeChange(noti:NSNotification!){
         var obj:NSNumber = noti!.object as NSNumber
         
-        altitudeLabel!.text = String(format:"Altitude change: %.2fm\t%d",obj.floatValue,altitudeChangeTimes!)
+        altitudeTextView!.text = String(format:"Altitude change: %.2fm\t%d",obj.floatValue,altitudeChangeTimes!)+"\n"+altitudeTextView!.text
         altitudeChangeTimes!++
     }
     func initLocationManaer(){

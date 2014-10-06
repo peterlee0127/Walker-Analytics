@@ -7,7 +7,7 @@ exports.MotionData = mongoose.model('Admin',{
 		'time'	 :String,
 		'horizontalAccuracy' :Number,
 		'verticalAccuracy': Number,
-		'distance'	:Number,
+		'altitudeLog'	:String,
 		'altitude'	:Number,
 		'steps' 		:Number,
 		'floorsAscended':Number,

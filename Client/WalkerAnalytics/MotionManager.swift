@@ -78,20 +78,21 @@ class MotionManager: NSObject {
     
         
         altitudeQueue!.append(self.currentAltitudeData!.relativeAltitude.floatValue)
-        if(altitudeQueue!.count == 5){
+        if(altitudeQueue!.count == 6){
             
             altitudeQueue!.removeAtIndex(0)
 //            println(altitudeQueue!)
             
             var first:Float = altitudeQueue!.first! as Float
             var last:Float = altitudeQueue!.last! as Float
-            if(abs(last-first)>1.2) {
+            if(abs(last-first)>1.4) {
                 
                 println("move")
+            
                 
                 var date:NSDate = NSDate()
                 var formatter:NSDateFormatter = NSDateFormatter()
-                formatter.dateFormat = "MM/d H:m:ss"
+                formatter.dateFormat = "MM/d HH:mm:ss"
                 
                 var activityString = "靜止"
                 if(self.activityData != nil){
@@ -103,9 +104,11 @@ class MotionManager: NSObject {
                     }
                     else if(self.activityData!.automotive){
                         activityString = "交通工具"
+                        return
                     }
                     else if(self.activityData!.cycling){
                         activityString = "腳踏車"
+                        return
                     }
                 }
                     var ascneded = "0"
@@ -124,13 +127,16 @@ class MotionManager: NSObject {
                         "verticalAccuracy":String(format:"%.3f",location.verticalAccuracy),
                         "horizontalAccuracy":String(format: "%.3f",location.horizontalAccuracy),
                         "time":formatter.stringFromDate(date),
-                        "distance":"0",
+                        "altitudeLog":String(format:"%@",altitudeQueue!),
                         "steps":"0",
                         "floorsAscended":ascneded,
                         "floorsDescended":descended,
                         "activity":activityString]
                 
                 networkManager!.sendData(dict)
+                
+                altitudeQueue!.removeAtIndex(0)
+                altitudeQueue!.removeAtIndex(0)
             }
             
         }
