@@ -79,9 +79,7 @@ class MotionManager: NSObject {
         
         altitudeQueue!.append(self.currentAltitudeData!.relativeAltitude.floatValue)
         if(altitudeQueue!.count == 6){
-            
             altitudeQueue!.removeAtIndex(0)
-//            println(altitudeQueue!)
             
             var first:Float = altitudeQueue!.first! as Float
             var last:Float = altitudeQueue!.last! as Float
@@ -137,6 +135,8 @@ class MotionManager: NSObject {
                 
                 altitudeQueue!.removeAtIndex(0)
                 altitudeQueue!.removeAtIndex(0)
+                altitudeQueue!.removeAtIndex(0)
+                
             }
             
         }

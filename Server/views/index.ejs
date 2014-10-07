@@ -1,14 +1,18 @@
 <html ng-app="Safe-Walker">
 		<header>
 			<title><%= title %></title>
-			<script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
 <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.2.23/angular.min.js"></script>
 <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">
 <script src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
 <script src="core.js"></script>
 <script src="http://maps.google.com/maps/api/js?sensor=false"></script>
-<script src="jquery.tinyMap.min.js"></script>
-	<% include header.ejs %>
+<script src="http://app.essoduke.org/tinyMap/markerclusterer.js"></script>
+<script src="jquery.tinyMap-2.9.9.min.js"></script>
+<% include header.ejs %>
+<style>
+.map{width:auto;height:500px;background:#f0f0f0;color:#000}
+</style>
 </header>
 <body ng-controller="mainController" data-ng-init="getList()">
 <div id="map" class="map"></div>
@@ -51,38 +55,4 @@
 </table>
 
 </body>
-<style>
-.map{width:auto;height:500px;background:#f0f0f0;color:#000}
-</style>
-<script>
-	$.get( "/getList", function( data ) {
-			var placeArr = [];
-
-			$.each( data, function( i, raw ) {
-				var addr = [];
-				addr.push(raw.latitude);
-				addr.push(raw.longitude);
-				var place = { "text":raw.time+" "+raw.activity+" hor:"+raw.horizontalAccuracy,"addr": addr  };
-				placeArr.push(place);
-			});
-
-		$('#map').tinyMap({ // 25.175654, 121.449588
-
-						center: {x: '25.175654', y: '121.449588'},
-						zoom: 5,
-						marker: placeArr,
-						markerFitBounds: true,
-						streetViewControl:true,
-						mapTypeControl:true,
-						scaleControl:true
-		});
-
-
-
-
-	});
-
-
-
-</script>
 </html>
