@@ -83,7 +83,7 @@ class MotionManager: NSObject {
             
             var first:Float = altitudeQueue!.first! as Float
             var last:Float = altitudeQueue!.last! as Float
-            if(abs(last-first)>1.4) {
+            if(abs(last-first)>1.2) {
                 
                 println("move")
             
@@ -133,7 +133,6 @@ class MotionManager: NSObject {
                 
                 networkManager!.sendData(dict)
                 
-                altitudeQueue!.removeAtIndex(0)
                 altitudeQueue!.removeAtIndex(0)
                 altitudeQueue!.removeAtIndex(0)
                 

@@ -1,0 +1,15 @@
+<html ng-app="Safe-Walker">
+		<header>
+			<title><%= title %></title>
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+<script src="//ajax.googleapis.com/ajax/libs/angularjs/1.2.23/angular.min.js"></script>
+<link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">
+<script src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
+<script src="core.js"></script>
+<% include header.ejs %>
+</header>
+<body ng-controller="mainController" data-ng-init="getRecord()">
+	{{ MotionData }}
+
+</body>
+</html>

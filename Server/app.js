@@ -59,6 +59,10 @@ app.get('/' ,function(req,res){
 		res.render('index',{ title:"Walker Analytics"});
 });
 
+app.get('/record' ,function(req,res){
+		res.render('record',{ title:"Walker Analytics - Record"});
+});
+
 
 app.get('/getList',function(req,res){
 	model.MotionData.find(function(err,data){

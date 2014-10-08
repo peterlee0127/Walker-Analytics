@@ -1,10 +1,30 @@
 angular.module('Safe-Walker', [])
 .controller('mainController', ['$scope','$http', function($scope,$http) {
 
-	$scope.getList = function(){
+	$scope.getRecord = function(){
 		$http.get('/getList')
 			.success(function(data) {
 				$scope.MotionData = data;
+			})
+			.error(function(data) {
+				console.log('Error: ' + data);
+		});
+	};
+
+
+	$scope.getList = function(){
+		$http.get('/getList')
+			.success(function(data) {
+				data.sort(function(a,b){
+					  var keyA = new Date(a.time),
+				    keyB = new Date(b.time);
+				    // Compare the 2 dates
+				    if(keyA < keyB) return -1;
+				    if(keyA > keyB) return 1;
+    				return 0;
+				});
+				$scope.MotionData = data;
+				console.log(data);
 
 					var placeArr = [];
 					var coordinateArr = [];
@@ -45,9 +65,6 @@ angular.module('Safe-Walker', [])
 								scaleControl:true,
 								markerCluster: true
 				});
-
-
-
 			})
 			.error(function(data) {
 				console.log('Error: ' + data);
