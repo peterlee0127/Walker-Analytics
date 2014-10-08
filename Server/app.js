@@ -29,6 +29,9 @@ app.disable('x-powered-by');
 
 // No need csrf
 app.post('/saveMotionData',function(req,res){
+			if(!req.body.time){
+					return;
+			}
 			model.MotionData.create(
 			{
 				activity: req.body.activity,

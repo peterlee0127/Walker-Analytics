@@ -99,6 +99,7 @@ class MotionManager: NSObject {
                     }
                     else if(self.activityData!.stationary){
                         activityString = "靜止"
+                        return
                     }
                     else if(self.activityData!.automotive){
                         activityString = "交通工具"
@@ -119,6 +120,10 @@ class MotionManager: NSObject {
                     }
                     
                     var location:CLLocation = locationManager!.location!
+                    if(location.horizontalAccuracy>50){
+                        return
+                    }
+                
                     var dict:Dictionary = ["latitude":String(format:"%lf",location.coordinate.latitude),
                         "longitude":String(format:"%lf",location.coordinate.longitude),
                         "altitude":String(format:"%lf",location.altitude),
