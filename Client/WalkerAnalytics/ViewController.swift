@@ -18,6 +18,7 @@ class ViewController: UIViewController,CLLocationManagerDelegate,MKMapViewDelega
     var locationManager:CLLocationManager?
     var motionManager:MotionManager?
     var altitudeChangeTimes:Int?
+    var reStartTimer:NSTimer?
     //IBOutlet
     @IBOutlet var accuracyLabel:UILabel?
     @IBOutlet var altitudeTextView:UITextView?
@@ -49,7 +50,7 @@ class ViewController: UIViewController,CLLocationManagerDelegate,MKMapViewDelega
         locationManager!.requestWhenInUseAuthorization()
         locationManager!.requestAlwaysAuthorization()
         locationManager!.activityType = CLActivityType.Fitness
-        locationManager!.distanceFilter = kCLDistanceFilterNone
+        locationManager!.distanceFilter = 1
     }
     func initMotionManager(){
        motionManager = MotionManager.sharedInstance
@@ -68,10 +69,28 @@ class ViewController: UIViewController,CLLocationManagerDelegate,MKMapViewDelega
     func locationManager(manager: CLLocationManager!, didUpdateLocations locations: [AnyObject]!) {
         var location:CLLocation = locations.first as CLLocation
         accuracyLabel!.text = "horizontal:\(location.horizontalAccuracy)\t vertical:\(location.verticalAccuracy)"
-        if(location.horizontalAccuracy<20 || location.verticalAccuracy<15){
+        if(location.horizontalAccuracy>=25){
             //Accuracy 精確度
-  
+            dispatch_async(dispatch_get_main_queue(), {
+                self.locationManager!.stopUpdatingLocation()
+                self.locationManager!.stopMonitoringSignificantLocationChanges()
+                self.locationManager!.delegate = nil
+                self.accuracyLabel!.alpha = 0.2
+//                println("stop")
+            })
+            
+            self.reStartTimer = NSTimer.scheduledTimerWithTimeInterval(6, target: self, selector: "reStartLocationUpdate", userInfo: nil, repeats: false)
         }  // accuracy end
+        
+    }
+    func reStartLocationUpdate(){
+        dispatch_async(dispatch_get_main_queue(), {
+            self.locationManager!.startUpdatingLocation()
+            self.locationManager!.startMonitoringSignificantLocationChanges()
+            self.locationManager!.delegate = self
+            self.accuracyLabel!.alpha = 1
+//            println("start")
+        })
         
     }
     override func didReceiveMemoryWarning() {

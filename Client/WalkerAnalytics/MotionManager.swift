@@ -62,7 +62,6 @@ class MotionManager: NSObject {
         if CMPedometer.isStepCountingAvailable() {
             
         
-        
         }
         if CMMotionActivityManager.isActivityAvailable() {
             activityManager!.startActivityUpdatesToQueue(NSOperationQueue(), withHandler: { (activity:CMMotionActivity!) -> Void in
@@ -72,10 +71,15 @@ class MotionManager: NSObject {
         
     }
     func altitudeDidChange(){
-  
+ 
+        var location:CLLocation? = locationManager?.location?
+        if(location?.horizontalAccuracy>25){
+            return
+        }
+        
         var altitudeValue:NSNumber = NSNumber(float: self.currentAltitudeData!.relativeAltitude!.floatValue)
         NSNotificationCenter.defaultCenter().postNotificationName("kAltitudeChange", object: altitudeValue)
-    
+   
         
         altitudeQueue!.append(self.currentAltitudeData!.relativeAltitude.floatValue)
         if(altitudeQueue!.count == 6){
@@ -119,16 +123,13 @@ class MotionManager: NSObject {
                         ascneded = "1"
                     }
                     
-                    var location:CLLocation = locationManager!.location!
-                    if(location.horizontalAccuracy>50){
-                        return
-                    }
+            
                 
-                    var dict:Dictionary = ["latitude":String(format:"%lf",location.coordinate.latitude),
-                        "longitude":String(format:"%lf",location.coordinate.longitude),
-                        "altitude":String(format:"%lf",location.altitude),
-                        "verticalAccuracy":String(format:"%.3f",location.verticalAccuracy),
-                        "horizontalAccuracy":String(format: "%.3f",location.horizontalAccuracy),
+                    var dict:Dictionary = ["latitude":String(format:"%lf",location!.coordinate.latitude),
+                        "longitude":String(format:"%lf",location!.coordinate.longitude),
+                        "altitude":String(format:"%lf",location!.altitude),
+                        "verticalAccuracy":String(format:"%.3f",location!.verticalAccuracy),
+                        "horizontalAccuracy":String(format: "%.3f",location!.horizontalAccuracy),
                         "time":formatter.stringFromDate(date),
                         "altitudeLog":String(format:"%@",altitudeQueue!),
                         "steps":"0",
