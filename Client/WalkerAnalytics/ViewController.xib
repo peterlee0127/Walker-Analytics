@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="6249" systemVersion="14A386a" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="6249" systemVersion="14A388a" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6243"/>
     </dependencies>
@@ -8,6 +8,7 @@
             <connections>
                 <outlet property="accuracyLabel" destination="Db3-xJ-lgd" id="Epm-gc-vig"/>
                 <outlet property="altitudeTextView" destination="RMN-jN-tkJ" id="c0V-qY-8cN"/>
+                <outlet property="headingLabel" destination="yE0-5t-r7K" id="MKr-fW-NS8"/>
                 <outlet property="view" destination="iN0-l3-epB" id="TZa-ex-axk"/>
             </connections>
         </placeholder>
@@ -19,28 +20,38 @@
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Db3-xJ-lgd">
                     <rect key="frame" x="19" y="44" width="563" height="48"/>
                     <constraints>
-                        <constraint firstAttribute="height" constant="48" id="jYT-RW-WMh"/>
+                        <constraint firstAttribute="height" constant="48" id="9jC-yO-TTz"/>
                     </constraints>
                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                     <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                     <nil key="highlightedColor"/>
                 </label>
                 <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="RMN-jN-tkJ">
-                    <rect key="frame" x="43" y="100" width="515" height="470"/>
+                    <rect key="frame" x="43" y="145" width="515" height="425"/>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                     <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                 </textView>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yE0-5t-r7K">
+                    <rect key="frame" x="19" y="86" width="563" height="34"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                    <nil key="highlightedColor"/>
+                </label>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
             <constraints>
-                <constraint firstItem="RMN-jN-tkJ" firstAttribute="top" secondItem="Db3-xJ-lgd" secondAttribute="bottom" constant="8" symbolic="YES" id="7Wf-JR-BkN"/>
-                <constraint firstItem="Db3-xJ-lgd" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="19" id="A2r-jL-GpQ"/>
-                <constraint firstAttribute="bottom" secondItem="RMN-jN-tkJ" secondAttribute="bottom" constant="30" id="JMm-zo-K3q"/>
-                <constraint firstItem="Db3-xJ-lgd" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="44" id="Kmg-wU-BeL"/>
-                <constraint firstItem="RMN-jN-tkJ" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="43" id="QYB-VE-lSk"/>
-                <constraint firstItem="Db3-xJ-lgd" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="Z24-gz-Kcw"/>
-                <constraint firstItem="RMN-jN-tkJ" firstAttribute="centerX" secondItem="Db3-xJ-lgd" secondAttribute="centerX" id="u4F-gy-Ett"/>
+                <constraint firstItem="RMN-jN-tkJ" firstAttribute="top" secondItem="yE0-5t-r7K" secondAttribute="bottom" constant="25" id="2WW-pf-mSl"/>
+                <constraint firstAttribute="bottom" secondItem="RMN-jN-tkJ" secondAttribute="bottom" constant="30" id="IDT-lF-YdW"/>
+                <constraint firstItem="RMN-jN-tkJ" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="43" id="KPN-Tz-tzZ"/>
+                <constraint firstItem="yE0-5t-r7K" firstAttribute="trailing" secondItem="Db3-xJ-lgd" secondAttribute="trailing" id="Pzc-rr-nkR"/>
+                <constraint firstItem="RMN-jN-tkJ" firstAttribute="top" secondItem="Db3-xJ-lgd" secondAttribute="bottom" constant="53" id="U9p-YQ-fxi"/>
+                <constraint firstItem="yE0-5t-r7K" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="86" id="WsA-Ir-mWY"/>
+                <constraint firstItem="Db3-xJ-lgd" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="44" id="gEa-wA-vk9"/>
+                <constraint firstItem="RMN-jN-tkJ" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="hYG-FE-XJS"/>
+                <constraint firstItem="yE0-5t-r7K" firstAttribute="centerX" secondItem="RMN-jN-tkJ" secondAttribute="centerX" id="jev-0f-OCg"/>
+                <constraint firstItem="yE0-5t-r7K" firstAttribute="leading" secondItem="Db3-xJ-lgd" secondAttribute="leading" id="nGH-V1-Y8A"/>
+                <constraint firstItem="Db3-xJ-lgd" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="19" id="vtb-gq-LWG"/>
             </constraints>
         </view>
     </objects>

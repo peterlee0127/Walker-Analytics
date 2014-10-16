@@ -15,6 +15,7 @@ class MotionManager: NSObject {
     var activityManager:CMMotionActivityManager? //activity
     var pedometer:CMPedometer?  // step
     var altimeter:CMAltimeter?  //altitude
+    var degree:Double?
     
     var altitudeQueue:Array<Float>?
     //NetworkManager
@@ -47,20 +48,17 @@ class MotionManager: NSObject {
         pedometer = CMPedometer()
         altitudeQueue = []
         networkManager = NetworkManager.sharedInstance
+     
     }
     func startTrackingMotion(){
-     
         if CMAltimeter.isRelativeAltitudeAvailable() {
             altimeter!.startRelativeAltitudeUpdatesToQueue(NSOperationQueue.mainQueue(), withHandler: {  (data:CMAltitudeData!, error) in
                 if error == nil {
-                    
                   self.currentAltitudeData = data
-                    
                 }
             })
         }
         if CMPedometer.isStepCountingAvailable() {
-            
         
         }
         if CMMotionActivityManager.isActivityAvailable() {
@@ -70,29 +68,28 @@ class MotionManager: NSObject {
             }  // activity avaiable end
         
     }
-    func altitudeDidChange(){
- 
+    func altitudeDidChange(){   //每次氣壓計Sensor取得新資料，約1s 跑一次此function
+        
         var location:CLLocation? = locationManager?.location?
-        if(location?.horizontalAccuracy>25){
-            return
+        if(location?.horizontalAccuracy>25){ // GPS精確度>25m，可能在室內，精確度太低，不取資料
+            return  //這次氣壓計變化不取，這次function會在此停止
         }
         
         var altitudeValue:NSNumber = NSNumber(float: self.currentAltitudeData!.relativeAltitude!.floatValue)
         NSNotificationCenter.defaultCenter().postNotificationName("kAltitudeChange", object: altitudeValue)
    
         
-        altitudeQueue!.append(self.currentAltitudeData!.relativeAltitude.floatValue)
-        if(altitudeQueue!.count == 6){
-            altitudeQueue!.removeAtIndex(0)
+        altitudeQueue!.append(self.currentAltitudeData!.relativeAltitude.floatValue)  //把目前的氣壓資料加入Queue
+        if(altitudeQueue!.count == 8){  // Queue 滿 8個時
+            altitudeQueue!.removeAtIndex(0)  //先丟掉第一個
             
-            var first:Float = altitudeQueue!.first! as Float
-            var last:Float = altitudeQueue!.last! as Float
-            if(abs(last-first)>1.2) {
+            var first:Float = altitudeQueue!.first! as Float  //抓最前面的
+            var last:Float = altitudeQueue!.last! as Float  //抓最後面的
+            if(abs(last-first)>2.8) {       //  絕對值(最前面-最後面)>2.8m
                 
                 println("move")
             
-                
-                var date:NSDate = NSDate()
+                var date:NSDate = NSDate() //取得現在時間
                 var formatter:NSDateFormatter = NSDateFormatter()
                 formatter.dateFormat = "MM/d HH:mm:ss"
                 
@@ -103,27 +100,27 @@ class MotionManager: NSObject {
                     }
                     else if(self.activityData!.stationary){
                         activityString = "靜止"
-                        return
+                        return  //不取資料
                     }
                     else if(self.activityData!.automotive){
                         activityString = "交通工具"
-                        return
+                        return  //不取資料
                     }
                     else if(self.activityData!.cycling){
                         activityString = "腳踏車"
-                        return
+                        return  //不取資料
                     }
                 }
                     var ascneded = "0"
                     var descended = "0"
                     if(first>last){
-                        descended = "1"
+                        descended = "1"     //下樓
                     }
                     else{
-                        ascneded = "1"
+                        ascneded = "1"      //上樓
                     }
-                    
-            
+                
+                
                 
                     var dict:Dictionary = ["latitude":String(format:"%lf",location!.coordinate.latitude),
                         "longitude":String(format:"%lf",location!.coordinate.longitude),
@@ -133,14 +130,16 @@ class MotionManager: NSObject {
                         "time":formatter.stringFromDate(date),
                         "altitudeLog":String(format:"%@",altitudeQueue!),
                         "steps":"0",
+                        "heading":String(format:"%.f",degree!),
                         "floorsAscended":ascneded,
                         "floorsDescended":descended,
                         "activity":activityString]
                 
-                networkManager!.sendData(dict)
+                networkManager!.sendData(dict)      //把資料傳給Server
                 
-                altitudeQueue!.removeAtIndex(0)
-                altitudeQueue!.removeAtIndex(0)
+                
+                altitudeQueue!.removeAtIndex(0)     //丟掉第一個
+                altitudeQueue!.removeAtIndex(0)      //丟掉第一個
                 
             }
             

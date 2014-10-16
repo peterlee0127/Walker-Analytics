@@ -67,7 +67,7 @@ app.get('/record' ,function(req,res){
 });
 
 
-app.get('/getList',function(req,res){
+app.get('/getAllList',function(req,res){
 	model.MotionData.find(function(err,data){
 		if(err)
 			 res.send(err);

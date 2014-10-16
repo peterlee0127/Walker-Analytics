@@ -22,6 +22,7 @@ class ViewController: UIViewController,CLLocationManagerDelegate,MKMapViewDelega
     //IBOutlet
     @IBOutlet var accuracyLabel:UILabel?
     @IBOutlet var altitudeTextView:UITextView?
+    @IBOutlet var headingLabel:UILabel?
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -69,28 +70,21 @@ class ViewController: UIViewController,CLLocationManagerDelegate,MKMapViewDelega
     func locationManager(manager: CLLocationManager!, didUpdateLocations locations: [AnyObject]!) {
         var location:CLLocation = locations.first as CLLocation
         accuracyLabel!.text = "horizontal:\(location.horizontalAccuracy)\t vertical:\(location.verticalAccuracy)"
-        if(location.horizontalAccuracy>=25){
-            //Accuracy 精確度
-            dispatch_async(dispatch_get_main_queue(), {
-                self.locationManager!.stopUpdatingLocation()
-                self.locationManager!.stopMonitoringSignificantLocationChanges()
-                self.locationManager!.delegate = nil
-                self.accuracyLabel!.alpha = 0.2
-//                println("stop")
-            })
-            
-            self.reStartTimer = NSTimer.scheduledTimerWithTimeInterval(6, target: self, selector: "reStartLocationUpdate", userInfo: nil, repeats: false)
-        }  // accuracy end
         
     }
-    func reStartLocationUpdate(){
-        dispatch_async(dispatch_get_main_queue(), {
-            self.locationManager!.startUpdatingLocation()
-            self.locationManager!.startMonitoringSignificantLocationChanges()
-            self.locationManager!.delegate = self
-            self.accuracyLabel!.alpha = 1
-//            println("start")
-        })
+    func locationManager(manager: CLLocationManager!, didUpdateHeading newHeading: CLHeading!) {
+        if (newHeading.headingAccuracy > 0) {
+            
+            //取得角度值-磁北(0-北, 90-東, 180-南, 270-西)
+//            var theHeading:CLLocationDirection  = newHeading.magneticHeading;
+            
+            //取得角度值-正北(0-北, 90-東, 180-南, 270-西)
+            var theHeading:CLLocationDirection = newHeading.trueHeading;
+            motionManager!.degree = theHeading
+            headingLabel!.text = String(format: "%.f", theHeading)
+        } else {
+            println("need reset")
+        }
         
     }
     override func didReceiveMemoryWarning() {
