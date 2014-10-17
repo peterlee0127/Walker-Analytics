@@ -36,13 +36,11 @@ app.post('/saveMotionData',function(req,res){
 			{
 				activity: req.body.activity,
 				time: req.body.time,
-				verticalAccuracy:req.body.verticalAccuracy,
 				horizontalAccuracy:req.body.horizontalAccuracy,
 				altitudeLog:req.body.altitudeLog,
 				altitude:req.body.altitude,
-				steps:req.body.steps,
-				floorsAscended:req.body.floorsAscended,
-				floorsDescended:req.body.floorsDescended,
+				heading:req.body.heading,
+				floorIsAscended:req.body.floorIsAscended,
 				latitude: req.body.latitude,
 				longitude: req.body.longitude
 			},function(err,ser){

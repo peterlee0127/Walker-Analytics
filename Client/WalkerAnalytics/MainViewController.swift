@@ -23,6 +23,7 @@ class MainViewController: UIViewController,UIScrollViewDelegate {
         scrollView!.contentSize = CGSizeMake(view.frame.size.width, view.frame.size.height*CGFloat(mode))
         scrollView!.delegate = self
         scrollView!.pagingEnabled = true
+        scrollView!.scrollEnabled = false
         
         addViewController()
     }

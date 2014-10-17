@@ -71,7 +71,7 @@ class MotionManager: NSObject {
     func altitudeDidChange(){   //每次氣壓計Sensor取得新資料，約1s 跑一次此function
         
         var location:CLLocation? = locationManager?.location?
-        if(location?.horizontalAccuracy>25){ // GPS精確度>25m，可能在室內，精確度太低，不取資料
+        if(location?.horizontalAccuracy>=30){ // GPS精確度>25m，可能在室內，精確度太低，不取資料
             return  //這次氣壓計變化不取，這次function會在此停止
         }
         
@@ -81,22 +81,24 @@ class MotionManager: NSObject {
         
         altitudeQueue!.append(self.currentAltitudeData!.relativeAltitude.floatValue)  //把目前的氣壓資料加入Queue
         if(altitudeQueue!.count == 8){  // Queue 滿 8個時
-            altitudeQueue!.removeAtIndex(0)  //先丟掉第一個
             
             var first:Float = altitudeQueue!.first! as Float  //抓最前面的
             var last:Float = altitudeQueue!.last! as Float  //抓最後面的
-            if(abs(last-first)>2.8) {       //  絕對值(最前面-最後面)>2.8m
+            if(abs(last-first)>2.4) {       // 絕對值(最前面-最後面)>
                 
                 println("move")
             
                 var date:NSDate = NSDate() //取得現在時間
                 var formatter:NSDateFormatter = NSDateFormatter()
                 formatter.dateFormat = "MM/d HH:mm:ss"
-                
+               
                 var activityString = "靜止"
                 if(self.activityData != nil){
-                    if(self.activityData!.walking || self.activityData!.running){
-                        activityString = "跑步/走路"
+                    if(self.activityData!.walking)  {
+                        activityString = "走路"
+                    }
+                    else if(self.activityData!.running) {
+                        activityString = "跑步"
                     }
                     else if(self.activityData!.stationary){
                         activityString = "靜止"
@@ -111,38 +113,36 @@ class MotionManager: NSObject {
                         return  //不取資料
                     }
                 }
-                    var ascneded = "0"
-                    var descended = "0"
-                    if(first>last){
-                        descended = "1"     //下樓
-                    }
-                    else{
-                        ascneded = "1"      //上樓
-                    }
+                if(activityString=="靜止"){
+                    return
+                }
+                var floorIsAscended = "-1"
+                if(first>=last){
+                    floorIsAscended = "0"   //下樓
+                }
+                else{
+                    floorIsAscended = "1"    //上樓
+                }
                 
-                
-                
-                    var dict:Dictionary = ["latitude":String(format:"%lf",location!.coordinate.latitude),
-                        "longitude":String(format:"%lf",location!.coordinate.longitude),
-                        "altitude":String(format:"%lf",location!.altitude),
-                        "verticalAccuracy":String(format:"%.3f",location!.verticalAccuracy),
-                        "horizontalAccuracy":String(format: "%.3f",location!.horizontalAccuracy),
-                        "time":formatter.stringFromDate(date),
-                        "altitudeLog":String(format:"%@",altitudeQueue!),
-                        "steps":"0",
-                        "heading":String(format:"%.f",degree!),
-                        "floorsAscended":ascneded,
-                        "floorsDescended":descended,
-                        "activity":activityString]
+                var dict:Dictionary = ["latitude":String(format:"%lf",location!.coordinate.latitude),
+                    "longitude":String(format:"%lf",location!.coordinate.longitude),
+                    "altitude":String(format:"%lf",location!.altitude),
+                    "horizontalAccuracy":String(format:"%.3f",location!.horizontalAccuracy),
+                    "time":formatter.stringFromDate(date),
+                    "altitudeLog":String(format:"%@",altitudeQueue!),
+                    "heading":String(format:"%.f",degree!),
+                    "floorIsAscended":floorIsAscended,
+                    "activity":activityString]
                 
                 networkManager!.sendData(dict)      //把資料傳給Server
                 
                 
-                altitudeQueue!.removeAtIndex(0)     //丟掉第一個
-                altitudeQueue!.removeAtIndex(0)      //丟掉第一個
+           
                 
             }
-            
+            altitudeQueue!.removeAtIndex(0)
+            altitudeQueue!.removeAtIndex(0)
+            altitudeQueue!.removeAtIndex(0)
         }
         
     }
