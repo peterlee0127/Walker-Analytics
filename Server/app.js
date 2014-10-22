@@ -57,11 +57,16 @@ app.post('/saveMotionData',function(req,res){
 
 
 app.get('/' ,function(req,res){
-		res.render('index',{ title:"Walker Analytics"});
+		res.render('all',{ title:"Walker Analytics"});
 });
 
-app.get('/record' ,function(req,res){
-		res.render('record',{ title:"Walker Analytics - Record"});
+
+app.get('/analytics' ,function(req,res){
+		res.render('analytics',{ title:"Walker Analytics - Analytics"});
+});
+
+app.get('/rawRecord' ,function(req,res){
+		res.render('rawRecord',{ title:"Walker Analytics - Record"});
 });
 
 

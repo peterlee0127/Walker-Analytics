@@ -1,0 +1,32 @@
+<div>
+    <label>Search:</label>
+    <input type="text" ng-model="search">
+</div>
+<table class="table table-hover">
+  <thead>
+       <tr>
+        <th class="col-md-1">activity</th>
+        <th class="col-md-1">time</th>
+        <th class="col-md-1">altitudeLog</th>
+        <th class="col-md-1">altitude</th>
+        <th class="col-md-1">horizontalAccuracy</th>
+        <th class="col-md-1">heading</th>
+        <th class="col-md-1">floorIsAscended</th>
+        <th class="col-md-1">latitude</th>
+        <th class="col-md-1">longitude</th>
+  </tr>
+  </thead>
+  <tbody>
+      <tr ng-repeat="data in MotionData  | orderBy:'time' | filter:search">
+          <td ng-click="deleteData(data._id)">{{ data.activity }}</td>
+          <td>{{ data.time | date:'yyyy-MM/d HH:mm:ss' }}</td>
+          <td>{{ data.altitudeLog }}</td>
+          <td>{{ data.altitude }}</td>
+          <td>{{ data.horizontalAccuracy }}</td>
+          <td>{{ data.heading }}</td>
+          <td>{{ data.floorIsAscended }}</td>
+          <td>{{ data.latitude }}</td>
+          <td>{{ data.longitude }}</td>
+      </tr>
+  </tbody>
+</table>

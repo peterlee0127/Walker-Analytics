@@ -71,7 +71,7 @@ class MotionManager: NSObject {
     func altitudeDidChange(){   //每次氣壓計Sensor取得新資料，約1s 跑一次此function
         
         var location:CLLocation? = locationManager?.location?
-        if(location?.horizontalAccuracy>=30){ // GPS精確度>25m，可能在室內，精確度太低，不取資料
+        if(location?.horizontalAccuracy>=25){ // GPS精確度>25m，可能在室內，精確度太低，不取資料
             return  //這次氣壓計變化不取，這次function會在此停止
         }
         
@@ -80,11 +80,11 @@ class MotionManager: NSObject {
    
         
         altitudeQueue!.append(self.currentAltitudeData!.relativeAltitude.floatValue)  //把目前的氣壓資料加入Queue
-        if(altitudeQueue!.count == 8){  // Queue 滿 8個時
+        if(altitudeQueue!.count == 6){  // Queue 滿 8個時
             
             var first:Float = altitudeQueue!.first! as Float  //抓最前面的
             var last:Float = altitudeQueue!.last! as Float  //抓最後面的
-            if(abs(last-first)>2.0) {       // 絕對值(最前面-最後面)>
+            if(abs(last-first)>1.6) {       // 絕對值(最前面-最後面)>
                 
                 println("move")
             
