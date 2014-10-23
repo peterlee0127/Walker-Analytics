@@ -18,6 +18,7 @@ class MotionManager: NSObject {
     var degree:Double?
     
     var altitudeQueue:Array<Float>?
+    var locationQueue:Array<CLLocationCoordinate2D>?
     //NetworkManager
     var networkManager:NetworkManager?
     
@@ -47,8 +48,9 @@ class MotionManager: NSObject {
         altimeter = CMAltimeter()
         pedometer = CMPedometer()
         altitudeQueue = []
+        locationQueue = []
         networkManager = NetworkManager.sharedInstance
-     
+        
     }
     func startTrackingMotion(){
         if CMAltimeter.isRelativeAltitudeAvailable() {
@@ -71,7 +73,7 @@ class MotionManager: NSObject {
     func altitudeDidChange(){   //每次氣壓計Sensor取得新資料，約1s 跑一次此function
         
         var location:CLLocation? = locationManager?.location?
-        if(location?.horizontalAccuracy>=25){ // GPS精確度>25m，可能在室內，精確度太低，不取資料
+        if(location?.horizontalAccuracy>=10){ // GPS精確度>10m，可能在室內，精確度太低，不取資料
             return  //這次氣壓計變化不取，這次function會在此停止
         }
         
@@ -80,7 +82,9 @@ class MotionManager: NSObject {
    
         
         altitudeQueue!.append(self.currentAltitudeData!.relativeAltitude.floatValue)  //把目前的氣壓資料加入Queue
-        if(altitudeQueue!.count == 6){  // Queue 滿 8個時
+        locationQueue!.append(location!.coordinate) // 把目前coordinate加入Queue
+        
+        if(altitudeQueue!.count == 6){  // Queue 滿 6個時
             
             var first:Float = altitudeQueue!.first! as Float  //抓最前面的
             var last:Float = altitudeQueue!.last! as Float  //抓最後面的
@@ -123,9 +127,10 @@ class MotionManager: NSObject {
                 else{
                     floorIsAscended = "1"    //上樓
                 }
+                var coordinate = locationQueue![3] as CLLocationCoordinate2D
                 
-                var dict:Dictionary = ["latitude":String(format:"%lf",location!.coordinate.latitude),
-                    "longitude":String(format:"%lf",location!.coordinate.longitude),
+                var dict:Dictionary = ["latitude":String(format:"%lf",coordinate.latitude),
+                    "longitude":String(format:"%lf",coordinate.longitude),
                     "altitude":String(format:"%lf",location!.altitude),
                     "horizontalAccuracy":String(format:"%.3f",location!.horizontalAccuracy),
                     "time":formatter.stringFromDate(date),
@@ -143,6 +148,9 @@ class MotionManager: NSObject {
             altitudeQueue!.removeAtIndex(0)
             altitudeQueue!.removeAtIndex(0)
             altitudeQueue!.removeAtIndex(0)
+            locationQueue!.removeAtIndex(0)
+            locationQueue!.removeAtIndex(0)
+            locationQueue!.removeAtIndex(0)
         }
         
     }

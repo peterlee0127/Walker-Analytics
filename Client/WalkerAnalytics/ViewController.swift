@@ -83,7 +83,7 @@ class ViewController: UIViewController,CLLocationManagerDelegate,MKMapViewDelega
             motionManager!.degree = theHeading
             headingLabel!.text = String(format: "heading:%.f", theHeading)
         } else {
-            println("need reset")
+//            println("need reset")
         }
         
     }
