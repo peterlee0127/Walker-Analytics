@@ -73,22 +73,25 @@ class MotionManager: NSObject {
     func altitudeDidChange(){   //每次氣壓計Sensor取得新資料，約1s 跑一次此function
         
         var location:CLLocation? = locationManager?.location?
-        if(location?.horizontalAccuracy>=10){ // GPS精確度>10m，可能在室內，精確度太低，不取資料
-            return  //這次氣壓計變化不取，這次function會在此停止
-        }
         
         var altitudeValue:NSNumber = NSNumber(float: self.currentAltitudeData!.relativeAltitude!.floatValue)
         NSNotificationCenter.defaultCenter().postNotificationName("kAltitudeChange", object: altitudeValue)
-   
         
         altitudeQueue!.append(self.currentAltitudeData!.relativeAltitude.floatValue)  //把目前的氣壓資料加入Queue
         locationQueue!.append(location!.coordinate) // 把目前coordinate加入Queue
         
-        if(altitudeQueue!.count == 6){  // Queue 滿 6個時
+
+        if(location?.horizontalAccuracy>=10){ // GPS精確度>10m，可能在室內，精確度太低，不取資料
+            altitudeQueue!.removeAtIndex(0)
+            locationQueue!.removeAtIndex(0)
+            return  //這次氣壓計變化不取，這次function會在此停止
+        }
+        
+        if(altitudeQueue!.count == 8){  // Queue 滿 6個時
             
             var first:Float = altitudeQueue!.first! as Float  //抓最前面的
             var last:Float = altitudeQueue!.last! as Float  //抓最後面的
-            if(abs(last-first)>1.6) {       // 絕對值(最前面-最後面)>
+            if(abs(last-first)>2.4) {       // 絕對值(最前面-最後面)>
                 
                 println("move")
             
@@ -127,7 +130,7 @@ class MotionManager: NSObject {
                 else{
                     floorIsAscended = "1"    //上樓
                 }
-                var coordinate = locationQueue![3] as CLLocationCoordinate2D
+                var coordinate = locationQueue![4] as CLLocationCoordinate2D
                 
                 var dict:Dictionary = ["latitude":String(format:"%lf",coordinate.latitude),
                     "longitude":String(format:"%lf",coordinate.longitude),
