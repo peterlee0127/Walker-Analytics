@@ -91,9 +91,9 @@ class MotionManager: NSObject {
             
             var first:Float = altitudeQueue!.first! as Float  //抓最前面的
             var last:Float = altitudeQueue!.last! as Float  //抓最後面的
-            if(abs(last-first)>2.4) {       // 絕對值(最前面-最後面)>
+            if(abs(last-first)>2.2) {       // 絕對值(最前面-最後面)>
                 
-                println("move")
+//                println("move")
             
                 var date:NSDate = NSDate() //取得現在時間
                 var formatter:NSDateFormatter = NSDateFormatter()
@@ -130,7 +130,7 @@ class MotionManager: NSObject {
                 else{
                     floorIsAscended = "1"    //上樓
                 }
-                var coordinate = locationQueue![4] as CLLocationCoordinate2D
+                var coordinate = locationQueue![3] as CLLocationCoordinate2D
                 
                 var dict:Dictionary = ["latitude":String(format:"%lf",coordinate.latitude),
                     "longitude":String(format:"%lf",coordinate.longitude),
