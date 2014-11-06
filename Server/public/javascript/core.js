@@ -164,25 +164,25 @@ angular.module('Safe-Walker', [])
 				}
 					*/
 					var polyLineArr = [];
-					var longitude = 121;
+					var longitude = 119;
 					for(i=0;i<10000;i++) {
 									var num = longitude+i*0.0005;
 									var dict = {};
 									var coords = [];
-									coords.push([25,num]);
-									coords.push([27,num]);
+									coords.push([21,num]);
+									coords.push([26,num]);
 									dict.coords = coords;
 									dict.color='#008800';
 									dict.width=1;
 									polyLineArr.push(dict);
 					}
-					var latitude = 25;
+					var latitude = 21;
 					for(i=0;i<10000;i++) {
 									var num = latitude+i*0.0005;
 									var dict = {};
 									var coords = [];
-									coords.push([num,120]);
-									coords.push([num,122]);
+									coords.push([num,119]);
+									coords.push([num,123]);
 									dict.coords = coords;
 									dict.color='#008800';
 									dict.width=1;
