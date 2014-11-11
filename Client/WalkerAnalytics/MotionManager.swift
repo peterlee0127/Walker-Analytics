@@ -17,9 +17,10 @@ class MotionManager: NSObject {
     var altimeter:CMAltimeter?  //altitude
     var degree:Double?
     
-    var altitudeQueue:Array<Float>?
+    var relAltitudeQueue:Array<Float>?
     var locationQueue:Array<CLLocationCoordinate2D>?
     var mapAltitudeQueue:Array<Float>?
+    var stairsChecking:Bool = false
     //NetworkManager
     var networkManager:NetworkManager?
     
@@ -48,7 +49,7 @@ class MotionManager: NSObject {
         activityManager = CMMotionActivityManager()
         altimeter = CMAltimeter()
         pedometer = CMPedometer()
-        altitudeQueue = []
+        relAltitudeQueue = []
         locationQueue = []
         mapAltitudeQueue = []
         networkManager = NetworkManager.sharedInstance
@@ -93,69 +94,93 @@ class MotionManager: NSObject {
         return ""
     }
     func altitudeDidChange(){   //每次氣壓計Sensor取得新資料，約1s 跑一次此function
-        
+      
         var location:CLLocation? = locationManager?.location?
         
-        var altitudeValue:NSNumber = NSNumber(float: self.currentAltitudeData!.relativeAltitude!.floatValue)
-        NSNotificationCenter.defaultCenter().postNotificationName("kAltitudeChange", object: altitudeValue)
-        
-        altitudeQueue!.append(self.currentAltitudeData!.relativeAltitude.floatValue)  //把目前的氣壓資料加入Queue
+        relAltitudeQueue!.append(self.currentAltitudeData!.relativeAltitude.floatValue)  //把目前的氣壓資料加入Queue
         locationQueue!.append(location!.coordinate) // 把目前coordinate加入Queue
         mapAltitudeQueue!.append(Float(location!.altitude))
 
+        var activityString:String = getActivityString() as String
+        if(activityString == "")  {
+            if(stairsChecking) {
+                sendDataToServer(location, activity: activityString)
+            }
+            return
+        }
+        
         if(location?.horizontalAccuracy>=10){ // GPS精確度>10m，可能在室內，精確度太低，不取資料
             removeQueueElementAtIndex(0)
+            if(stairsChecking) {
+                sendDataToServer(location, activity: activityString)
+            }
             return  //這次氣壓計變化不取，這次function會在此停止
         }
         
-        if(altitudeQueue!.count == 7) {  // Queue 滿
-            var activityString:String = getActivityString() as String
-            if(activityString == "")  {
-                return
+        if(relAltitudeQueue!.count >= 7) {  // Queue 滿
+            if(!stairsChecking) {
+                var first:Float = relAltitudeQueue!.first! as Float  //抓最前面的
+                var last:Float = relAltitudeQueue!.last! as Float  //抓最後面的
+                if(abs(first-last)>1.8)
+                {
+                    stairsChecking = true
+                }   // check
+            }else {
+                var count = relAltitudeQueue!.count
+                var lastThree:Float = relAltitudeQueue![count-3] as Float  //抓倒數第三個
+                var lastTwo:Float = relAltitudeQueue![count-2] as Float  //抓倒數第二個
+                var last:Float = relAltitudeQueue!.last! as Float  //抓最後面的
+                if(abs(last-lastTwo)+abs(lastThree+lastTwo)<0.6){   // 最後兩次變化 < 0.6m 當作 樓梯已結束
+                    sendDataToServer(location, activity: activityString)
+                }
+                
             }
-            
-            var first:Float = altitudeQueue!.first! as Float  //抓最前面的
-            var last:Float = altitudeQueue!.last! as Float  //抓最後面的
-            if(abs(first-last)>1.8)
-            {
-                var date:NSDate = NSDate() //取得現在時間
-        
-                var floorIsAscended = "-1"
-                if(first>=last){
-                    floorIsAscended = "0"   //下樓
-                }
-                else{
-                    floorIsAscended = "1"    //上樓
-                }
-                var latitudeArr:Array<Float> = []
-                var longitudeArr:Array<Float> = []
-                for loc in locationQueue! {
-                    latitudeArr.append(Float(loc.latitude))
-                    longitudeArr.append(Float(loc.longitude))
-                }
-            
-                var dict:Dictionary<String,AnyObject> = [
-                    "latitude":latitudeArr,
-                    "longitude":longitudeArr,
-                    "altitude":mapAltitudeQueue!,
-                    "horizontalAccuracy":location!.horizontalAccuracy,
-                    "timestamp":date.timeIntervalSince1970,
-                    "altitudeLog":altitudeQueue!,
-                    "floorIsAscended":floorIsAscended,
-                    "activity":activityString       ]
-            
-                networkManager!.sendData(dict)
-            
-            }   // check
-            removeQueueElementAtIndex(0)
-            removeQueueElementAtIndex(0)
         }   // Queue count
         
     }
+    func sendDataToServer(var location:CLLocation?,var activity:String) {
+        var first:Float = relAltitudeQueue!.first! as Float  //抓最前面的
+        var last:Float = relAltitudeQueue!.last! as Float  //抓最後面的
+        
+        var date:NSDate = NSDate() //取得現在時間
+        var floorIsAscended = "-1"
+        if(first>=last){
+            floorIsAscended = "0"   //下樓
+        }
+        else{
+            floorIsAscended = "1"    //上樓
+        }
+        var latitudeArr:Array<Float> = []
+        var longitudeArr:Array<Float> = []
+        for loc in locationQueue! {
+            latitudeArr.append(Float(loc.latitude))
+            longitudeArr.append(Float(loc.longitude))
+        }
+        
+        var dict:Dictionary<String,AnyObject> = [
+            "latitude":latitudeArr,
+            "longitude":longitudeArr,
+            "altitude":mapAltitudeQueue!,
+            "horizontalAccuracy":location!.horizontalAccuracy,
+            "timestamp":date.timeIntervalSince1970,
+            "altitudeLog":relAltitudeQueue!,
+            "floorIsAscended":floorIsAscended,
+            "activity":activity       ]
+        
+        networkManager!.sendData(dict)
+        removeQueueAllElement()
+        
+        stairsChecking = false
+    }
     func removeQueueElementAtIndex(index:Int){
-        altitudeQueue!.removeAtIndex(index)
+        relAltitudeQueue!.removeAtIndex(index)
         locationQueue!.removeAtIndex(index)
         mapAltitudeQueue!.removeAtIndex(index)
+    }
+    func removeQueueAllElement() {
+        relAltitudeQueue!.removeAll()
+        locationQueue!.removeAll()
+        mapAltitudeQueue!.removeAll()
     }
     
 }

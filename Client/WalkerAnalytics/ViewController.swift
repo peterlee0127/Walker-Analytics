@@ -31,18 +31,11 @@ class ViewController: UIViewController,CLLocationManagerDelegate,MKMapViewDelega
         initMotionManager()
         
         accuracyLabel!.adjustsFontSizeToFitWidth = true
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: "altitudeChange:", name: "kAltitudeChange", object: nil)
         // Do any additional setup after loading the view, typically from a nib.
     }
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
         
-    }
-    func altitudeChange(noti:NSNotification!){
-        var obj:NSNumber = noti!.object as NSNumber
-        
-        altitudeTextView!.text = String(format:"Altitude change: %.2fm\t%d",obj.floatValue,altitudeChangeTimes!)+"\n"+altitudeTextView!.text
-        altitudeChangeTimes!++
     }
     func initLocationManaer(){
         locationManager = CLLocationManager()

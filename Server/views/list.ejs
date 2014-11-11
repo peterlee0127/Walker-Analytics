@@ -3,7 +3,8 @@
     <input type="text" ng-model="search">
     <div>Number of mark:{{ MotionData.length }}</div>
 </div>
-<table class="table table-hover table-striped">
+<div class="table-responsive">
+<table class="table table-hover">
   <thead>
        <tr>
         <th class="col-md-1">time</th>
@@ -17,8 +18,8 @@
   </tr>
   </thead>
   <tbody>
-      <tr ng-repeat="data in MotionData  | orderBy:'time' | filter:search">
-          <td ng-click="deleteData(data._id)">{{ data.timestamp * 1000 | date:'yyyy-MM-dd HH:mm:ss' }}</td>
+      <tr ng-repeat="data in MotionData  | orderBy:'timestamp' | filter:search">
+          <td ng-click="deleteData(data._id)">{{ data.timestamp * 1000 | date:'yyyy-MM/dd HH:mm:ss' }}</td>
           <td>{{ data.activity }}</td>
           <td>{{ data.altitudeLog }}</td>
           <td>{{ data.altitude }}</td>
@@ -29,3 +30,4 @@
       </tr>
   </tbody>
 </table>
+</div>
