@@ -68,7 +68,7 @@ angular.module('Walker Analytics', [])
 				});
 				$('#map').tinyMap({ // 25.175654, 121.449588
 								center: {x: '25.175654', y: '121.449588'},
-								zoom: 16,
+								zoom: 17,
 								circle: circleArr,
 								streetViewControl:true,
 								mapTypeControl:true,
@@ -109,7 +109,7 @@ angular.module('Walker Analytics', [])
 					});
 				$('#map').tinyMap({ // 25.175654, 121.449588
 								center: {x: '25.175654', y: '121.449588'},
-								zoom: 16,
+								zoom: 17,
 								polyline:drawMapLine(),
 								circle: circleArr,
 								streetViewControl:true,

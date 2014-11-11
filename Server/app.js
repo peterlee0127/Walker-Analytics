@@ -51,7 +51,7 @@ app.post('/saveMotionData',function(req,res){
 					result = {result:"fail"};
 				}
 				else{
-				result = {result:"ok"};
+				    result = {result:"ok"};
 				}
 				res.end(JSON.stringify(result));
 			});

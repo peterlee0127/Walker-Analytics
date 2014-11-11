@@ -21,8 +21,6 @@ class ViewController: UIViewController,CLLocationManagerDelegate,MKMapViewDelega
     var reStartTimer:NSTimer?
     //IBOutlet
     @IBOutlet var accuracyLabel:UILabel?
-    @IBOutlet var altitudeTextView:UITextView?
-    @IBOutlet var headingLabel:UILabel?
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -63,21 +61,6 @@ class ViewController: UIViewController,CLLocationManagerDelegate,MKMapViewDelega
     func locationManager(manager: CLLocationManager!, didUpdateLocations locations: [AnyObject]!) {
         var location:CLLocation = locations.first as CLLocation
         accuracyLabel!.text = "horizontal:\(location.horizontalAccuracy)"
-        
-    }
-    func locationManager(manager: CLLocationManager!, didUpdateHeading newHeading: CLHeading!) {
-        if (newHeading.headingAccuracy > 0) {
-            
-            //取得角度值-磁北(0-北, 90-東, 180-南, 270-西)
-//            var theHeading:CLLocationDirection  = newHeading.magneticHeading;
-            
-            //取得角度值-正北(0-北, 90-東, 180-南, 270-西)
-            var theHeading:CLLocationDirection = newHeading.trueHeading;
-            motionManager!.degree = theHeading
-            headingLabel!.text = String(format: "heading:%.f", theHeading)
-        } else {
-//            println("need reset")
-        }
         
     }
     override func didReceiveMemoryWarning() {

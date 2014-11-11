@@ -124,6 +124,7 @@ class MotionManager: NSObject {
                 if(abs(first-last)>1.8)
                 {
                     stairsChecking = true
+                    return
                 }   // check
             }else {
                 var count = relAltitudeQueue!.count
@@ -132,11 +133,13 @@ class MotionManager: NSObject {
                 var last:Float = relAltitudeQueue!.last! as Float  //抓最後面的
                 if(abs(last-lastTwo)+abs(lastThree+lastTwo)<0.6){   // 最後兩次變化 < 0.6m 當作 樓梯已結束
                     sendDataToServer(location, activity: activityString)
+                    return
                 }
                 
             }
+           
         }   // Queue count
-        
+        removeQueueElementAtIndex(0)
     }
     func sendDataToServer(var location:CLLocation?,var activity:String) {
         var first:Float = relAltitudeQueue!.first! as Float  //抓最前面的
