@@ -1,17 +1,18 @@
-<html ng-app="Safe-Walker">
+<html ng-app="Walker Analytics">
 		<header>
 			<title><%= title %></title>
-<script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
-<script src="//ajax.googleapis.com/ajax/libs/angularjs/1.2.23/angular.min.js"></script>
-<link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">
-<script src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
-<script src="core.js"></script>
-<script src="http://maps.google.com/maps/api/js?sensor=false"></script>
-<script src="http://app.essoduke.org/tinyMap/markerclusterer.js"></script>
-<script src="jquery.tinyMap-2.9.9.min.js"></script>
-<style>
-.map{width:auto;height:500px;background:#f0f0f0;color:#000}
-</style>
+			<meta name="viewport" content="width=device-width, initial-scale=1">
+			<script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+			<script src="//ajax.googleapis.com/ajax/libs/angularjs/1.2.23/angular.min.js"></script>
+			<link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">
+			<script src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
+			<script src="core.js"></script>
+			<script src="http://maps.google.com/maps/api/js?sensor=false"></script>
+			<script src="http://app.essoduke.org/tinyMap/markerclusterer.js"></script>
+			<script src="jquery.tinyMap-2.9.9.min.js"></script>
+			<style>
+			.map{width:auto;height:500px;background:#f0f0f0;color:#000}
+			</style>
 </header>
 <body ng-controller="mainController" data-ng-init="getList()">
 <% include header.ejs %>

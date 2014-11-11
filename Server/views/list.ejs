@@ -1,29 +1,28 @@
 <div>
     <label>Search:</label>
     <input type="text" ng-model="search">
+    <div>Number of mark:{{ MotionData.length }}</div>
 </div>
-<table class="table table-hover">
+<table class="table table-hover table-striped">
   <thead>
        <tr>
-        <th class="col-md-1">activity</th>
         <th class="col-md-1">time</th>
-        <th class="col-md-1">altitudeLog</th>
-        <th class="col-md-1">altitude</th>
-        <th class="col-md-1">horizontalAccuracy</th>
-        <th class="col-md-1">heading</th>
+        <th class="col-md-1">activity</th>
+        <th class="col-md-1">Relative-Altitude</th>
+        <th class="col-md-1">Map-Altitude</th>
+        <th class="col-md-1">Accuracy</th>
         <th class="col-md-1">floorIsAscended</th>
-        <th class="col-md-1">latitude</th>
-        <th class="col-md-1">longitude</th>
+        <th class="col-md-1">latitude緯度</th>
+        <th class="col-md-1">longitude經度</th>
   </tr>
   </thead>
   <tbody>
       <tr ng-repeat="data in MotionData  | orderBy:'time' | filter:search">
-          <td ng-click="deleteData(data._id)">{{ data.activity }}</td>
-          <td>{{ data.time | date:'yyyy-MM/d HH:mm:ss' }}</td>
+          <td ng-click="deleteData(data._id)">{{ data.timestamp * 1000 | date:'yyyy-MM-dd HH:mm:ss' }}</td>
+          <td>{{ data.activity }}</td>
           <td>{{ data.altitudeLog }}</td>
           <td>{{ data.altitude }}</td>
           <td>{{ data.horizontalAccuracy }}</td>
-          <td>{{ data.heading }}</td>
           <td>{{ data.floorIsAscended }}</td>
           <td>{{ data.latitude }}</td>
           <td>{{ data.longitude }}</td>

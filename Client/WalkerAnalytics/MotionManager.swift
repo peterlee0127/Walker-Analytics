@@ -19,6 +19,7 @@ class MotionManager: NSObject {
     
     var altitudeQueue:Array<Float>?
     var locationQueue:Array<CLLocationCoordinate2D>?
+    var mapAltitudeQueue:Array<Float>?
     //NetworkManager
     var networkManager:NetworkManager?
     
@@ -49,6 +50,7 @@ class MotionManager: NSObject {
         pedometer = CMPedometer()
         altitudeQueue = []
         locationQueue = []
+        mapAltitudeQueue = []
         networkManager = NetworkManager.sharedInstance
         
     }
@@ -70,6 +72,26 @@ class MotionManager: NSObject {
             }  // activity avaiable end
         
     }
+    func getActivityString() ->String {
+        if(self.activityData != nil){
+            if(self.activityData!.walking)  {
+                return "走路"
+            }
+            else if(self.activityData!.running) {
+                return "跑步"
+            }
+            else if(self.activityData!.stationary){
+                return "" //不取資料
+            }
+            else if(self.activityData!.automotive){
+                return  ""//不取資料
+            }
+            else if(self.activityData!.cycling){
+                return  ""//不取資料
+            }
+        }
+        return ""
+    }
     func altitudeDidChange(){   //每次氣壓計Sensor取得新資料，約1s 跑一次此function
         
         var location:CLLocation? = locationManager?.location?
@@ -79,50 +101,25 @@ class MotionManager: NSObject {
         
         altitudeQueue!.append(self.currentAltitudeData!.relativeAltitude.floatValue)  //把目前的氣壓資料加入Queue
         locationQueue!.append(location!.coordinate) // 把目前coordinate加入Queue
-        
+        mapAltitudeQueue!.append(Float(location!.altitude))
 
         if(location?.horizontalAccuracy>=10){ // GPS精確度>10m，可能在室內，精確度太低，不取資料
-            altitudeQueue!.removeAtIndex(0)
-            locationQueue!.removeAtIndex(0)
+            removeQueueElementAtIndex(0)
             return  //這次氣壓計變化不取，這次function會在此停止
         }
         
-        if(altitudeQueue!.count == 8){  // Queue 滿 6個時
+        if(altitudeQueue!.count == 7) {  // Queue 滿
+            var activityString:String = getActivityString() as String
+            if(activityString == "")  {
+                return
+            }
             
             var first:Float = altitudeQueue!.first! as Float  //抓最前面的
             var last:Float = altitudeQueue!.last! as Float  //抓最後面的
-            if(abs(last-first)>2.2) {       // 絕對值(最前面-最後面)>
-                
-//                println("move")
-            
+            if(abs(first-last)>1.8)
+            {
                 var date:NSDate = NSDate() //取得現在時間
-                var formatter:NSDateFormatter = NSDateFormatter()
-                formatter.dateFormat = "MM/d HH:mm:ss"
-               
-                var activityString = "靜止"
-                if(self.activityData != nil){
-                    if(self.activityData!.walking)  {
-                        activityString = "走路"
-                    }
-                    else if(self.activityData!.running) {
-                        activityString = "跑步"
-                    }
-                    else if(self.activityData!.stationary){
-                        activityString = "靜止"
-                        return  //不取資料
-                    }
-                    else if(self.activityData!.automotive){
-                        activityString = "交通工具"
-                        return  //不取資料
-                    }
-                    else if(self.activityData!.cycling){
-                        activityString = "腳踏車"
-                        return  //不取資料
-                    }
-                }
-                if(activityString=="靜止"){
-                    return
-                }
+        
                 var floorIsAscended = "-1"
                 if(first>=last){
                     floorIsAscended = "0"   //下樓
@@ -130,32 +127,35 @@ class MotionManager: NSObject {
                 else{
                     floorIsAscended = "1"    //上樓
                 }
-                var coordinate = locationQueue![3] as CLLocationCoordinate2D
-                
-                var dict:Dictionary = ["latitude":String(format:"%lf",coordinate.latitude),
-                    "longitude":String(format:"%lf",coordinate.longitude),
-                    "altitude":String(format:"%lf",location!.altitude),
-                    "horizontalAccuracy":String(format:"%.3f",location!.horizontalAccuracy),
-                    "time":formatter.stringFromDate(date),
-                    "altitudeLog":String(format:"%@",altitudeQueue!),
-                    "heading":String(format:"%.f",degree!),
+                var latitudeArr:Array<Float> = []
+                var longitudeArr:Array<Float> = []
+                for loc in locationQueue! {
+                    latitudeArr.append(Float(loc.latitude))
+                    longitudeArr.append(Float(loc.longitude))
+                }
+            
+                var dict:Dictionary<String,AnyObject> = [
+                    "latitude":latitudeArr,
+                    "longitude":longitudeArr,
+                    "altitude":mapAltitudeQueue!,
+                    "horizontalAccuracy":location!.horizontalAccuracy,
+                    "timestamp":date.timeIntervalSince1970,
+                    "altitudeLog":altitudeQueue!,
                     "floorIsAscended":floorIsAscended,
-                    "activity":activityString]
-                
-                networkManager!.sendData(dict)      //把資料傳給Server
-                
-                
-           
-                
-            }
-            altitudeQueue!.removeAtIndex(0)
-            altitudeQueue!.removeAtIndex(0)
-            altitudeQueue!.removeAtIndex(0)
-            locationQueue!.removeAtIndex(0)
-            locationQueue!.removeAtIndex(0)
-            locationQueue!.removeAtIndex(0)
-        }
+                    "activity":activityString       ]
+            
+                networkManager!.sendData(dict)
+            
+            }   // check
+            removeQueueElementAtIndex(0)
+            removeQueueElementAtIndex(0)
+        }   // Queue count
         
+    }
+    func removeQueueElementAtIndex(index:Int){
+        altitudeQueue!.removeAtIndex(index)
+        locationQueue!.removeAtIndex(index)
+        mapAltitudeQueue!.removeAtIndex(index)
     }
     
 }

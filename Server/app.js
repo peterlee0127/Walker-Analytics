@@ -13,9 +13,10 @@ var model = require('./model/model.js');
 
 // view engine setup
 app.set('view engine', 'ejs');
-app.use(bodyParser.urlencoded({ extended: false }))
+app.use(bodyParser.urlencoded({ extended: true }))
 app.use(bodyParser.json())
 app.use(bodyParser.json({ type: 'application/vnd.api+json' }))
+app.use(bodyParser.text({ type: 'text/html' }))
 // app.use(morgan('dev'));
 app.use(methodOverride());
 app.use(express.static(path.join(__dirname, 'public/javascript')));
@@ -29,28 +30,30 @@ app.disable('x-powered-by');
 
 // No need csrf
 app.post('/saveMotionData',function(req,res){
-			if(!req.body.time){
+	res.setHeader('content-type', 'text/html');
+			if(!req.body.timestamp){
 					return;
 			}
 			model.MotionData.create(
 			{
 				activity: req.body.activity,
-				time: req.body.time,
+				timestamp: req.body.timestamp,
 				horizontalAccuracy:req.body.horizontalAccuracy,
 				altitudeLog:req.body.altitudeLog,
 				altitude:req.body.altitude,
-				heading:req.body.heading,
 				floorIsAscended:req.body.floorIsAscended,
 				latitude: req.body.latitude,
 				longitude: req.body.longitude
 			},function(err,ser){
+				var result;
 				if(err){
 					console.log("save fail");
+					result = {result:"fail"};
 				}
 				else{
-					// console.log("save successful");
+				result = {result:"ok"};
 				}
-				res.end("ok");
+				res.end(JSON.stringify(result));
 			});
 
 });
@@ -99,7 +102,7 @@ app.get('/removeAllData',function(res,res){
 
 exports.startServer=function()
 {
-	app.listen(8082, function(){
-			console.log("Express server listening on port " + "8082");
+	app.listen(8083, function(){
+			console.log("Express server listening on port " + "8083");
 	});
 }

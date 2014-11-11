@@ -1,17 +1,16 @@
 var mongoose = require('mongoose');
 
-mongoose.connect('mongodb://localhost:27017/SafeWalker');
+mongoose.connect('mongodb://localhost:27017/SafeWalker-Test');
 
 exports.MotionData = mongoose.model('Admin',{
 		'activity'	:String,
-		'time'	 :String,
+		'timestamp'	 :Number,
 		'horizontalAccuracy' :Number,
-		'altitudeLog'	:String,
-		'altitude'	:Number,
-		'heading'    :Number,
+		'altitudeLog'	:[],
+		'altitude'	:[],
 		'floorIsAscended':Number,
-		'latitude'	:Number,
-		'longitude' :Number
+		'latitude'	:[],
+		'longitude'	:[]
 });
 
 exports.removeAllData = function(){
