@@ -8,8 +8,7 @@
 
 import UIKit
 
-let serverURL = "http://petertku.no-ip.org:8082/saveMotionData"
-let testURL = "http://petertku.no-ip.org:8083/saveMotionData"
+let serverURL = "http://petertku.no-ip.org/saveMotionData"
 
 class NetworkManager: NSObject {
     class var sharedInstance: NetworkManager {
@@ -27,7 +26,7 @@ class NetworkManager: NSObject {
         var httpManager = AFHTTPRequestOperationManager()
         httpManager.responseSerializer.acceptableContentTypes = httpManager.responseSerializer.acceptableContentTypes.setByAddingObject("text/html")
         httpManager.requestSerializer = AFHTTPRequestSerializer()
-        httpManager.POST(testURL, parameters: dictionary, success: { (operation, reponseObject) -> Void in
+        httpManager.POST(serverURL, parameters: dictionary, success: { (operation, reponseObject) -> Void in
             
             
             }, failure: { (operation, error) -> Void in

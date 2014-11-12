@@ -102,7 +102,7 @@ app.get('/removeAllData',function(res,res){
 
 exports.startServer=function()
 {
-	app.listen(8082, function(){
-			console.log("Express server listening on port " + "8082");
+	app.listen(80, function(){
+			console.log("Express server listening on port " + "80");
 	});
 }
