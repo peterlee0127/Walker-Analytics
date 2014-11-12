@@ -13,20 +13,19 @@
         <th class="col-md-1">Map-Altitude</th>
         <th class="col-md-1">Accuracy</th>
         <th class="col-md-1">floorIsAscended</th>
-        <th class="col-md-1">latitude緯度</th>
-        <th class="col-md-1">longitude經度</th>
+        <th class="col-md-1">latitude緯度,longitude經度</th>
   </tr>
   </thead>
   <tbody>
       <tr ng-repeat="data in MotionData  | orderBy:'timestamp' | filter:search">
-          <td ng-click="deleteData(data._id)">{{ data.timestamp * 1000 | date:'yyyy-MM/dd HH:mm:ss' }}</td>
+          <td ng-click="deleteData(11)">{{ data.timestamp * 1000 | date:'MM/dd HH:mm:ss' }}</td>
           <td>{{ data.activity }}</td>
           <td>{{ data.altitudeLog }}</td>
           <td>{{ data.altitude }}</td>
           <td>{{ data.horizontalAccuracy }}</td>
           <td>{{ data.floorIsAscended }}</td>
-          <td>{{ data.latitude }}</td>
-          <td>{{ data.longitude }}</td>
+          <td>{{ data.latitude }}，{{ data.longitude }}</td>
+
       </tr>
   </tbody>
 </table>

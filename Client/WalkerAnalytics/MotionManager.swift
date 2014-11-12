@@ -96,6 +96,9 @@ class MotionManager: NSObject {
     func altitudeDidChange(){   //每次氣壓計Sensor取得新資料，約1s 跑一次此function
       
         var location:CLLocation? = locationManager?.location?
+        if(location==nil){
+            return
+        }
         
         relAltitudeQueue!.append(self.currentAltitudeData!.relativeAltitude.floatValue)  //把目前的氣壓資料加入Queue
         locationQueue!.append(location!.coordinate) // 把目前coordinate加入Queue
@@ -118,11 +121,11 @@ class MotionManager: NSObject {
             return  //這次氣壓計變化不取，這次function會在此停止
         }
 //        println(relAltitudeQueue!)
-        if(relAltitudeQueue!.count >= 6) {  // Queue 滿
+        if(relAltitudeQueue!.count >= 7) {  // Queue 滿
             if(!stairsChecking) {
                 var first:Float = relAltitudeQueue!.first! as Float  //抓最前面的
                 var last:Float = relAltitudeQueue!.last! as Float  //抓最後面的
-                if(abs(first-last)>1.7)  {
+                if(abs(first-last)>1.9)  {
                     stairsChecking = true
                 }else{
                     removeQueueFirstElement()
@@ -133,6 +136,7 @@ class MotionManager: NSObject {
                 var lastTwo:Float = relAltitudeQueue![count-2] as Float  //抓倒數第二個
                 var last:Float = relAltitudeQueue!.last! as Float  //抓最後面的
                 if(abs(last-lastTwo)+abs(lastThree-lastTwo)<0.7){   // 最後兩次變化 < 0.7m 當作 樓梯已結束
+                    removeQueueLastElement()
                     removeQueueLastElement()
                     sendDataToServer(location, activity: activityString)
                 }
@@ -186,9 +190,11 @@ class MotionManager: NSObject {
             mapAltitudeQueue!.removeAll()
     }
     func removeQueueLastElement(){
-        relAltitudeQueue!.removeLast()
-        locationQueue!.removeLast()
-        mapAltitudeQueue!.removeLast()
+        if(relAltitudeQueue!.count>0) {
+            relAltitudeQueue!.removeLast()
+            locationQueue!.removeLast()
+            mapAltitudeQueue!.removeLast()
+        }
     }
     
 }

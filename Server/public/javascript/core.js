@@ -54,14 +54,15 @@ angular.module('Walker Analytics', [])
 				$scope.MotionData = data;
 
 				var circleArr = [];
-				$.each(data,function(i,raw){
+				$.each(data,function(index,raw){
+						var color = '#'+Math.floor(Math.random()*16777215).toString(16);
 						for(var i=0;i<raw.latitude.length;i++) {
 								var circle = {};
 								circle.center = {   lat:raw.latitude[i],lng:raw.longitude[i]  };
 								circle.radius = raw.horizontalAccuracy;
 								circle.width = 1;
-								circle.color = '#dc143c';
-								circle.fillcolor = '#dc143c';
+								circle.color = color;
+								circle.fillcolor = color;
 								circle.id = raw._id+i;
 								circleArr.push(circle);
 						}
@@ -95,17 +96,18 @@ angular.module('Walker Analytics', [])
 				$scope.MotionData = data;
 
 					var circleArr = [];
-					$.each(data,function(i,raw){
-						  for(var i=0;i<raw.latitude.length;i++) {
-									var circle = {};
-									circle.center = {   lat:raw.latitude[i],lng:raw.longitude[i]  };
-									circle.radius = raw.horizontalAccuracy;
-									circle.width = 1;
-									circle.color = '#dc143c';
-									circle.fillcolor = '#dc143c';
-									circle.id = raw._id+i;
-									circleArr.push(circle);
-							}
+					$.each(data,function(index,raw){
+						var color = '#'+Math.floor(Math.random()*16777215).toString(16);
+						for(var i=0;i<raw.latitude.length;i++) {
+								var circle = {};
+								circle.center = {   lat:raw.latitude[i],lng:raw.longitude[i]  };
+								circle.radius = raw.horizontalAccuracy;
+								circle.width = 1;
+								circle.color = color;
+								circle.fillcolor = color;
+								circle.id = raw._id+i;
+								circleArr.push(circle);
+						}
 					});
 				$('#map').tinyMap({ // 25.175654, 121.449588
 								center: {x: '25.175654', y: '121.449588'},
