@@ -79,7 +79,7 @@ class MotionManager: NSObject {
                 return "走路"
             }
             else if(self.activityData!.running) {
-                return "跑步"
+                return "" //不取資料
             }
             else if(self.activityData!.stationary){
                 return "" //不取資料
@@ -121,11 +121,18 @@ class MotionManager: NSObject {
             return  //這次氣壓計變化不取，這次function會在此停止
         }
 //        println(relAltitudeQueue!)
-        if(relAltitudeQueue!.count >= 7) {  // Queue 滿
+//        if(relAltitudeQueue!.count >= 7) {  // Queue 滿
             if(!stairsChecking) {
-                var first:Float = relAltitudeQueue!.first! as Float  //抓最前面的
+                var count = relAltitudeQueue!.count
+                if(count<4) {
+                    return
+                }
+                var lastFour:Float = relAltitudeQueue![count-4] as Float
+                var lastThree:Float = relAltitudeQueue![count-3] as Float  //抓倒數第三個
+                var lastTwo:Float = relAltitudeQueue![count-2] as Float  //抓倒數第二個
                 var last:Float = relAltitudeQueue!.last! as Float  //抓最後面的
-                if(abs(first-last)>1.9)  {
+                var compare:Float = abs(last-lastTwo)+abs(lastThree-lastTwo)+abs(lastFour-lastThree)
+                if(compare>1.3)  {
                     stairsChecking = true
                 }else{
                     removeQueueFirstElement()
@@ -135,14 +142,14 @@ class MotionManager: NSObject {
                 var lastThree:Float = relAltitudeQueue![count-3] as Float  //抓倒數第三個
                 var lastTwo:Float = relAltitudeQueue![count-2] as Float  //抓倒數第二個
                 var last:Float = relAltitudeQueue!.last! as Float  //抓最後面的
-                if(abs(last-lastTwo)+abs(lastThree-lastTwo)<0.7){   // 最後兩次變化 < 0.7m 當作 樓梯已結束
+                if(abs(last-lastTwo)+abs(lastThree-lastTwo)<0.6)    {// 最後兩次變化 < 0.6m 當作 樓梯已結束
                     removeQueueLastElement()
                     removeQueueLastElement()
                     sendDataToServer(location, activity: activityString)
                 }
             }
       
-        }   // Queue count
+       // }   // Queue count
     }
     func sendDataToServer(var location:CLLocation?,var activity:String) {
         var first:Float = relAltitudeQueue!.first! as Float  //抓最前面的

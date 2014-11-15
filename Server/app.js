@@ -6,7 +6,7 @@ var bodyParser = require('body-parser');
 var morgan = require('morgan');
 var methodOverride = require('method-override');
 var helmet = require('helmet');
-var csrf    = require('csurf')
+var csrf   = require('csurf')
 var fs = require('fs');
 
 var model = require('./model/model.js');
@@ -75,10 +75,10 @@ app.get('/rawRecord' ,function(req,res){
 
 app.get('/getAllList',function(req,res){
 	model.MotionData.find(function(err,data){
-		if(err)
-			 res.send(err);
- 		else
-		   res.json(data);
+		if(err) {
+			 res.send(err);  }
+ 		else {
+		   res.json(data); }
 	});
 });
 
@@ -86,7 +86,7 @@ app.post('/api/deleteData/', function(req, res) {
 	model.MotionData.findOne( {  _id:req.body._id },function(err,data)
 	{
 			if(!data){
-				res.end("ok");
+				res.end("fail");
 				return;
 			}
 			data.remove();
@@ -96,7 +96,7 @@ app.post('/api/deleteData/', function(req, res) {
 
 app.get('/removeAllData',function(res,res){
 	model.removeAllData();
-	res.send("removeAllData");
+	res.end("removeAllData finish");
 });
 
 

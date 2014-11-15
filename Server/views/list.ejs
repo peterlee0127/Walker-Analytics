@@ -18,7 +18,7 @@
   </thead>
   <tbody>
       <tr ng-repeat="data in MotionData  | orderBy:'timestamp' | filter:search">
-          <td ng-click="deleteData(11)">{{ data.timestamp * 1000 | date:'MM/dd HH:mm:ss' }}</td>
+          <td ng-click="deleteData(data._id)">{{ data.timestamp * 1000 | date:'MM/dd HH:mm:ss' }}</td>
           <td>{{ data.activity }}</td>
           <td>{{ data.altitudeLog }}</td>
           <td>{{ data.altitude }}</td>
