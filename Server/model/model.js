@@ -3,7 +3,8 @@ var mongoose = require('mongoose');
 mongoose.connect('mongodb://localhost:27017/Walker-Analytics');
 
 exports.MotionData = mongoose.model('RawData',{
-	'activity'	:String,
+	'algorithmVer': Number,
+  'activity'	:String,
 	'timestamp'	 :Number,
 	'horizontalAccuracy' :Number,
 	'altitudeLog'	:[],

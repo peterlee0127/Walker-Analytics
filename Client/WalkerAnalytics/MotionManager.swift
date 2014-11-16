@@ -113,7 +113,7 @@ class MotionManager: NSObject {
             return
         }
         
-        if(location?.horizontalAccuracy>=10){ // GPS精確度>10m，可能在室內，精確度太低，不取資料
+        if(location?.horizontalAccuracy>=10000){ // GPS精確度>10m，可能在室內，精確度太低，不取資料
             removeQueueFirstElement()
             if(stairsChecking) {
                 sendDataToServer(location, activity: activityString)
@@ -171,6 +171,7 @@ class MotionManager: NSObject {
         }
         
         var dict:Dictionary<String,AnyObject> = [
+            "algorithmVer":"0",
             "latitude":latitudeArr,
             "longitude":longitudeArr,
             "altitude":mapAltitudeQueue!,
