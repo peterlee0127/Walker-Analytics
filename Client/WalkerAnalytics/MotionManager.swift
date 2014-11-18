@@ -113,7 +113,7 @@ class MotionManager: NSObject {
             return
         }
         
-        if(location?.horizontalAccuracy>=10000){ // GPS精確度>10m，可能在室內，精確度太低，不取資料
+        if(location?.horizontalAccuracy>=20){ // GPS精確度>10m，可能在室內，精確度太低，不取資料
             removeQueueFirstElement()
             if(stairsChecking) {
                 sendDataToServer(location, activity: activityString)
@@ -132,7 +132,7 @@ class MotionManager: NSObject {
                 var lastTwo:Float = relAltitudeQueue![count-2] as Float  //抓倒數第二個
                 var last:Float = relAltitudeQueue!.last! as Float  //抓最後面的
                 var compare:Float = abs(last-lastTwo)+abs(lastThree-lastTwo)+abs(lastFour-lastThree)
-                if(compare>1.3)  {
+                if(compare>1.1)  {
                     stairsChecking = true
                 }else{
                     removeQueueFirstElement()

@@ -11,26 +11,33 @@ angular.module('Walker Analytics', [])
 		});
 	};
 	function drawMapLine() {
+		// top 				25.177124, 121.444276
+		// down 			25.172374, 121.447352
+		// right down 25.173899, 121.457147
 		var polyLineArr = [];
-		var longitude = 119;
-		for(i=0;i<=10000;i++) {
-						var num = longitude+i*0.0005;
+		var longitude = [121.444,121.457];
+		var latitude = [25.172,25.179];
+		var width = 0.0005;
+		var NumOfLongLine = (latitude[1]-latitude[0])/width+1;
+		var NumOfLatLine =  (longitude[1]-longitude[0])/width+1;
+		for(i=0;i<=NumOfLatLine;i++) {
+						var num = longitude[0]+i*width;
 						var dict = {};
 						var coords = [];
-						coords.push([21,num]);
-						coords.push([26,num]);
+						coords.push([latitude[0],num]);
+						coords.push([latitude[1],num]);
 						dict.coords = coords;
 						dict.color='#008800';
 						dict.width=1;
 						polyLineArr.push(dict);
 		}
-		var latitude = 21;
-		for(i=0;i<=10000;i++) {
-						var num = latitude+i*0.0005;
+
+		for(i=0;i<=NumOfLongLine;i++) {
+						var num = latitude[0]+i*width;
 						var dict = {};
 						var coords = [];
-						coords.push([num,119]);
-						coords.push([num,123]);
+						coords.push([num,longitude[0]]);
+						coords.push([num,longitude[1]]);
 						dict.coords = coords;
 						dict.color='#008800';
 						dict.width=1;
@@ -111,7 +118,7 @@ angular.module('Walker Analytics', [])
 					});
 				$('#map').tinyMap({ // 25.175654, 121.449588
 								center: {x: '25.175654', y: '121.449588'},
-								zoom: 17,
+								zoom: 15,
 								polyline:drawMapLine(),
 								circle: circleArr,
 								streetViewControl:true,
