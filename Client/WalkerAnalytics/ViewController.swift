@@ -13,27 +13,31 @@ import CoreLocation
 import QuartzCore
 import AVFoundation
 
-class ViewController: UIViewController,CLLocationManagerDelegate,MKMapViewDelegate {
-    // Motion and Location
+class ViewController: UITabBarController,CLLocationManagerDelegate,MKMapViewDelegate {
     var locationManager:CLLocationManager?
     var motionManager:MotionManager?
-    var altitudeChangeTimes:Int?
-    var reStartTimer:NSTimer?
-    //IBOutlet
-    @IBOutlet var accuracyLabel:UILabel?
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        altitudeChangeTimes = 0
         initLocationManaer()
         initMotionManager()
         
-        accuracyLabel!.adjustsFontSizeToFitWidth = true
+        var mapVC:MapViewController = MapViewController(nibName:"MapViewController",bundle:nil)
+        mapVC.tabBarItem.title = "地圖"
+        
+        var settingVC:SettingViewController = SettingViewController(nibName:"SettingViewController",bundle:nil)
+        settingVC.tabBarItem.title = "設定"
+        
+        setViewControllers([mapVC,settingVC], animated: true)
         // Do any additional setup after loading the view, typically from a nib.
     }
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
         
+        if !CMAltimeter.isRelativeAltitudeAvailable() {
+            var alert:UIAlertView = UIAlertView(title: "您的裝置不支援樓梯探測", message: "只能提供路況報導 無法提供資料分析", delegate: nil, cancelButtonTitle: "確定")
+            alert.show()
+        }
     }
     func initLocationManaer(){
         locationManager = CLLocationManager()
@@ -42,7 +46,7 @@ class ViewController: UIViewController,CLLocationManagerDelegate,MKMapViewDelega
         locationManager!.requestWhenInUseAuthorization()
         locationManager!.requestAlwaysAuthorization()
         locationManager!.activityType = CLActivityType.Fitness
-        locationManager!.distanceFilter = 1
+        locationManager!.distanceFilter = kCLDistanceFilterNone
     }
     func initMotionManager(){
        motionManager = MotionManager.sharedInstance
@@ -54,20 +58,14 @@ class ViewController: UIViewController,CLLocationManagerDelegate,MKMapViewDelega
            locationManager!.startUpdatingLocation()
             locationManager!.startMonitoringSignificantLocationChanges()
             locationManager!.startUpdatingHeading()
-        
         }
-        
     }
     func locationManager(manager: CLLocationManager!, didUpdateLocations locations: [AnyObject]!) {
-        var location:CLLocation = locations.first as CLLocation
-        accuracyLabel!.text = "horizontal:\(location.horizontalAccuracy)"
-        
+        var location =  locations.first as CLLocation
+        NSNotificationCenter.defaultCenter().postNotificationName("accuracyChange", object: location)
     }
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
-
+ 
+    
 
 }
 

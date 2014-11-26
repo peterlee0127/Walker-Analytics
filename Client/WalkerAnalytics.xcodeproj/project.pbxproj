@@ -7,7 +7,12 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		D012E8C81A24553E00C2C504 /* SpeakerManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D012E8C71A24553E00C2C504 /* SpeakerManager.swift */; };
 		D09DC31519DE4712001B7841 /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D09DC31419DE4712001B7841 /* NetworkManager.swift */; };
+		D0B48DB01A25A03700186D58 /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0B48DAE1A25A03700186D58 /* MapViewController.swift */; };
+		D0B48DB11A25A03700186D58 /* MapViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D0B48DAF1A25A03700186D58 /* MapViewController.xib */; };
+		D0B48DB41A25A1F300186D58 /* SettingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0B48DB21A25A1F300186D58 /* SettingViewController.swift */; };
+		D0B48DB51A25A1F300186D58 /* SettingViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D0B48DB31A25A1F300186D58 /* SettingViewController.xib */; };
 		D0B7FD2E19DDBD6A00F1E3F3 /* CoreMotion.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D0B7FD2D19DDBD6A00F1E3F3 /* CoreMotion.framework */; };
 		D0B7FD3019DDBD8000F1E3F3 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D0B7FD2F19DDBD8000F1E3F3 /* CoreLocation.framework */; };
 		D0C5A2EE19DD397900F407FA /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0C5A2ED19DD397900F407FA /* AppDelegate.swift */; };
@@ -15,8 +20,6 @@
 		D0C5A2F519DD397900F407FA /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D0C5A2F419DD397900F407FA /* Images.xcassets */; };
 		D0C5A2F819DD397900F407FA /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = D0C5A2F619DD397900F407FA /* LaunchScreen.xib */; };
 		D0C5A30E19DD39F000F407FA /* ViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D0C5A30D19DD39F000F407FA /* ViewController.xib */; };
-		D0C5A31119DD3A2700F407FA /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0C5A30F19DD3A2700F407FA /* MainViewController.swift */; };
-		D0C5A31219DD3A2700F407FA /* MainViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D0C5A31019DD3A2700F407FA /* MainViewController.xib */; };
 		D0D2409719DD55E10029F325 /* MotionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0D2409619DD55E10029F325 /* MotionManager.swift */; };
 		D167200B980FDD750532F9BC /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A2A2F8F706BA8613D3D9DC4C /* libPods.a */; };
 /* End PBXBuildFile section */
@@ -25,8 +28,13 @@
 		48F0FBCC5B9150D034BCC4E5 /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
 		A2A2F8F706BA8613D3D9DC4C /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		C1F55BD0B14EAD441821AA97 /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
+		D012E8C71A24553E00C2C504 /* SpeakerManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SpeakerManager.swift; sourceTree = "<group>"; };
 		D01A4A1D19DE496800539D43 /* Bridge-Header.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Bridge-Header.h"; sourceTree = "<group>"; };
 		D09DC31419DE4712001B7841 /* NetworkManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
+		D0B48DAE1A25A03700186D58 /* MapViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
+		D0B48DAF1A25A03700186D58 /* MapViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MapViewController.xib; sourceTree = "<group>"; };
+		D0B48DB21A25A1F300186D58 /* SettingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingViewController.swift; sourceTree = "<group>"; };
+		D0B48DB31A25A1F300186D58 /* SettingViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SettingViewController.xib; sourceTree = "<group>"; };
 		D0B7FD2D19DDBD6A00F1E3F3 /* CoreMotion.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMotion.framework; path = System/Library/Frameworks/CoreMotion.framework; sourceTree = SDKROOT; };
 		D0B7FD2F19DDBD8000F1E3F3 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
 		D0C5A2E819DD397900F407FA /* WalkerAnalytics.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = WalkerAnalytics.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -36,8 +44,6 @@
 		D0C5A2F419DD397900F407FA /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		D0C5A2F719DD397900F407FA /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
 		D0C5A30D19DD39F000F407FA /* ViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ViewController.xib; sourceTree = "<group>"; };
-		D0C5A30F19DD3A2700F407FA /* MainViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
-		D0C5A31019DD3A2700F407FA /* MainViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MainViewController.xib; sourceTree = "<group>"; };
 		D0D2409619DD55E10029F325 /* MotionManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MotionManager.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -67,10 +73,12 @@
 		D05B481519DD3AF200E997A3 /* ViewController */ = {
 			isa = PBXGroup;
 			children = (
-				D0C5A30F19DD3A2700F407FA /* MainViewController.swift */,
-				D0C5A31019DD3A2700F407FA /* MainViewController.xib */,
 				D0C5A2EF19DD397900F407FA /* ViewController.swift */,
 				D0C5A30D19DD39F000F407FA /* ViewController.xib */,
+				D0B48DAE1A25A03700186D58 /* MapViewController.swift */,
+				D0B48DAF1A25A03700186D58 /* MapViewController.xib */,
+				D0B48DB21A25A1F300186D58 /* SettingViewController.swift */,
+				D0B48DB31A25A1F300186D58 /* SettingViewController.xib */,
 			);
 			name = ViewController;
 			sourceTree = "<group>";
@@ -79,6 +87,7 @@
 			isa = PBXGroup;
 			children = (
 				D0D2409619DD55E10029F325 /* MotionManager.swift */,
+				D012E8C71A24553E00C2C504 /* SpeakerManager.swift */,
 				D09DC31419DE4712001B7841 /* NetworkManager.swift */,
 			);
 			name = Manager;
@@ -200,9 +209,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				D0C5A2F819DD397900F407FA /* LaunchScreen.xib in Resources */,
+				D0B48DB51A25A1F300186D58 /* SettingViewController.xib in Resources */,
 				D0C5A30E19DD39F000F407FA /* ViewController.xib in Resources */,
 				D0C5A2F519DD397900F407FA /* Images.xcassets in Resources */,
-				D0C5A31219DD3A2700F407FA /* MainViewController.xib in Resources */,
+				D0B48DB11A25A03700186D58 /* MapViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -246,10 +256,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D0C5A31119DD3A2700F407FA /* MainViewController.swift in Sources */,
 				D0C5A2F019DD397900F407FA /* ViewController.swift in Sources */,
+				D0B48DB01A25A03700186D58 /* MapViewController.swift in Sources */,
+				D012E8C81A24553E00C2C504 /* SpeakerManager.swift in Sources */,
 				D09DC31519DE4712001B7841 /* NetworkManager.swift in Sources */,
 				D0C5A2EE19DD397900F407FA /* AppDelegate.swift in Sources */,
+				D0B48DB41A25A1F300186D58 /* SettingViewController.swift in Sources */,
 				D0D2409719DD55E10029F325 /* MotionManager.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

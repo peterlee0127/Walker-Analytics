@@ -8,9 +8,15 @@
 
 import UIKit
 
-let serverURL = "http://petertku.no-ip.org/saveMotionData"
+let saveMotionURL = "http://petertku.no-ip.org/saveMotionData"
+let AnalyticsURL = "http://petertku.no-ip.org/getAllList"
+
+@objc protocol NetworkManagerDelegate {
+    optional func downloadComplete(data:Array<[String:AnyObject]>!)
+}
 
 class NetworkManager: NSObject {
+    var delegate:NetworkManagerDelegate?
     class var sharedInstance: NetworkManager {
         struct Static {
             static var instance:NetworkManager?
@@ -26,7 +32,7 @@ class NetworkManager: NSObject {
         var httpManager = AFHTTPRequestOperationManager()
         httpManager.responseSerializer.acceptableContentTypes = httpManager.responseSerializer.acceptableContentTypes.setByAddingObject("text/html")
         httpManager.requestSerializer = AFHTTPRequestSerializer()
-        httpManager.POST(serverURL, parameters: dictionary, success: { (operation, reponseObject) -> Void in
+        httpManager.POST(saveMotionURL, parameters: dictionary, success: { (operation, reponseObject) -> Void in
             
             
             }, failure: { (operation, error) -> Void in
@@ -34,5 +40,20 @@ class NetworkManager: NSObject {
         })
     
     
+    }
+    func getAnalytics() {
+    
+        var manager:AFHTTPRequestOperationManager = AFHTTPRequestOperationManager()
+        manager.responseSerializer.acceptableContentTypes = NSSet(object: "application/json")
+        manager.responseSerializer = AFJSONResponseSerializer()
+        manager.GET(AnalyticsURL, parameters: nil, success: { (operation: AFHTTPRequestOperation!,responseObject: AnyObject!) in
+            
+            var result:Array<[String:AnyObject]> = responseObject as Array<[String:AnyObject]>
+            self.delegate!.downloadComplete!(result)
+            
+        }, failure: { (operation, error) -> Void in
+           println(error)
+        })
+        
     }
 }

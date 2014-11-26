@@ -22,30 +22,24 @@ angular.module('Walker Analytics', [])
 		var NumOfLatLine =  (longitude[1]-longitude[0])/width+1;
 		for(i=0;i<=NumOfLatLine;i++) {
 						var num = longitude[0]+i*width;
-						var dict = {};
-						var coords = [];
+						var dict = {};  var coords = [];
 						coords.push([latitude[0],num]);
 						coords.push([latitude[1],num]);
 						dict.coords = coords;
-						dict.color='#008800';
+						dict.color='#FFFF00';
 						dict.width=1;
-						polyLineArr.push(dict);
-		}
-
+						polyLineArr.push(dict);     	}
 		for(i=0;i<=NumOfLongLine;i++) {
 						var num = latitude[0]+i*width;
-						var dict = {};
-						var coords = [];
+						var dict = {};  var coords = [];
 						coords.push([num,longitude[0]]);
 						coords.push([num,longitude[1]]);
 						dict.coords = coords;
-						dict.color='#008800';
+						dict.color='#FFFF00';
 						dict.width=1;
-						polyLineArr.push(dict);
-		}
+						polyLineArr.push(dict);         }
 		return polyLineArr;
 	}
-
 
 	$scope.getList = function(){
 		$http.get('/getAllList')
@@ -101,7 +95,7 @@ angular.module('Walker Analytics', [])
 						return 0;
 				});
 				$scope.MotionData = data;
-
+				
 					var circleArr = [];
 					$.each(data,function(index,raw){
 						var color = '#'+Math.floor(Math.random()*16777215).toString(16);
@@ -130,8 +124,7 @@ angular.module('Walker Analytics', [])
 			.error(function(data) {
 				console.log('Error: ' + data);
 			});
-	};
-
+    	};
 
 		$scope.deleteData = function(_id){
 		var post = {  "_id":_id };

@@ -64,7 +64,6 @@ app.get('/' ,function(req,res){
 		res.render('all',{ title:"Walker Analytics"});
 });
 
-
 app.get('/analytics' ,function(req,res){
 		res.render('analytics',{ title:"Walker Analytics - Analytics"});
 });
@@ -83,6 +82,31 @@ app.get('/getAllList',function(req,res){
 	});
 });
 
+app.get('/getAnalytics',function(req,res)	{
+  model.MotionData.find(function(err,data)	{
+    if(err) {
+       res.send(err);  }
+     else {
+
+          for(var i=0;i<data.length;i++) {
+						for(var j=1;j<data.length;j++) {
+								if(i==j)	{
+									return;
+								}
+								var FirstItem = data[i];
+								var LastItem = data[j];
+
+
+
+						}
+          }
+
+				res.json(data);
+     }
+  });
+});
+
+
 app.post('/api/deleteData/', function(req, res) {
 	model.MotionData.findOne( {  _id:req.body._id },function(err,data)
 	{
@@ -95,7 +119,7 @@ app.post('/api/deleteData/', function(req, res) {
 	});
 });
 
-app.get('/removeAllData',function(res,res){
+app.get('/removeAllData',function(res,res)	{
 	model.removeAllData();
 	res.end("removeAllData finish");
 });

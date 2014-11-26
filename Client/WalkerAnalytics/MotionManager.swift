@@ -19,7 +19,6 @@ class MotionManager: NSObject {
     
     var relAltitudeQueue:Array<Float>?
     var locationQueue:Array<CLLocationCoordinate2D>?
-    var mapAltitudeQueue:Array<Float>?
     var stairsChecking:Bool = false
     //NetworkManager
     var networkManager:NetworkManager?
@@ -45,15 +44,16 @@ class MotionManager: NSObject {
         return Static.instance!
     }
     override init(){
-    
+        super.init()
+        
         activityManager = CMMotionActivityManager()
         altimeter = CMAltimeter()
         pedometer = CMPedometer()
         relAltitudeQueue = []
         locationQueue = []
-        mapAltitudeQueue = []
         networkManager = NetworkManager.sharedInstance
-        
+       
+
     }
     func startTrackingMotion(){
         if CMAltimeter.isRelativeAltitudeAvailable() {
@@ -63,6 +63,7 @@ class MotionManager: NSObject {
                 }
             })
         }
+      
         if CMPedometer.isStepCountingAvailable() {
         
         }
@@ -70,7 +71,7 @@ class MotionManager: NSObject {
             activityManager!.startActivityUpdatesToQueue(NSOperationQueue(), withHandler: { (activity:CMMotionActivity!) -> Void in
                 self.activityData = activity
                 })       // activity block end
-            }  // activity avaiable end
+        }
         
     }
     func getActivityString() ->String {
@@ -102,7 +103,6 @@ class MotionManager: NSObject {
         
         relAltitudeQueue!.append(self.currentAltitudeData!.relativeAltitude.floatValue)  //把目前的氣壓資料加入Queue
         locationQueue!.append(location!.coordinate) // 把目前coordinate加入Queue
-        mapAltitudeQueue!.append(Float(location!.altitude))
 
         var activityString:String = getActivityString() as String
         if(activityString == "")  {
@@ -121,7 +121,6 @@ class MotionManager: NSObject {
             return  //這次氣壓計變化不取，這次function會在此停止
         }
 //        println(relAltitudeQueue!)
-//        if(relAltitudeQueue!.count >= 7) {  // Queue 滿
             if(!stairsChecking) {
                 var count = relAltitudeQueue!.count
                 if(count<4) {
@@ -148,8 +147,6 @@ class MotionManager: NSObject {
                     sendDataToServer(location, activity: activityString)
                 }
             }
-      
-       // }   // Queue count
     }
     func sendDataToServer(var location:CLLocation?,var activity:String) {
         var first:Float = relAltitudeQueue!.first! as Float  //抓最前面的
@@ -174,8 +171,7 @@ class MotionManager: NSObject {
             "algorithmVer":"0",
             "latitude":latitudeArr,
             "longitude":longitudeArr,
-            "altitude":mapAltitudeQueue!,
-            "horizontalAccuracy":location!.horizontalAccuracy,
+            "horizontalAccuracy":5,
             "timestamp":date.timeIntervalSince1970,
             "altitudeLog":relAltitudeQueue!,
             "floorIsAscended":floorIsAscended,
@@ -189,19 +185,16 @@ class MotionManager: NSObject {
         if(relAltitudeQueue!.count>0){
             relAltitudeQueue!.removeAtIndex(0)
             locationQueue!.removeAtIndex(0)
-            mapAltitudeQueue!.removeAtIndex(0)
         }
     }
     func removeQueueAllElement() {
             relAltitudeQueue!.removeAll()
             locationQueue!.removeAll()
-            mapAltitudeQueue!.removeAll()
     }
     func removeQueueLastElement(){
         if(relAltitudeQueue!.count>0) {
             relAltitudeQueue!.removeLast()
             locationQueue!.removeLast()
-            mapAltitudeQueue!.removeLast()
         }
     }
     
