@@ -87,21 +87,18 @@ app.get('/getAnalytics',function(req,res)	{
     if(err) {
        res.send(err);  }
      else {
-
+					res.json(data);
           for(var i=0;i<data.length;i++) {
 						for(var j=1;j<data.length;j++) {
-								if(i==j)	{
-									return;
+								if(i!=j)	{
+									var FirstItem = data[i];
+									var LastItem = data[j];
+
+									
+
 								}
-								var FirstItem = data[i];
-								var LastItem = data[j];
-
-
-
 						}
           }
-
-				res.json(data);
      }
   });
 });

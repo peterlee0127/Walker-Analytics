@@ -74,28 +74,40 @@ class MotionManager: NSObject {
         }
         
     }
-    func getActivityString() ->String {
+    func getActivityString() ->String? {
         if(self.activityData != nil){
             if(self.activityData!.walking)  {
+//                reStartLocationManager()
                 return "走路"
+            }else if(self.activityData!.running){
+//                reStartLocationManager()
+                return nil   //不取資料
             }
-            else if(self.activityData!.running) {
-                return "" //不取資料
+            else {
+//                stopLocationManager()
+                return nil
             }
-            else if(self.activityData!.stationary){
-                return "" //不取資料
-            }
-            else if(self.activityData!.automotive){
-                return  ""//不取資料
-            }
-            else if(self.activityData!.cycling){
-                return  ""//不取資料
-            }
+        }else {
+            return nil
         }
-        return ""
+    }
+    func reStartLocationManager() {
+        locationManager!.startMonitoringSignificantLocationChanges()
+        locationManager!.startUpdatingLocation()
+    }
+    func stopLocationManager() {
+        locationManager!.stopMonitoringSignificantLocationChanges()
+        locationManager!.stopUpdatingLocation()
     }
     func altitudeDidChange(){   //每次氣壓計Sensor取得新資料，約1s 跑一次此function
-      
+        var activityString:String? = getActivityString() as String?
+        if(activityString?==nil)  {
+            removeQueueFirstElement()
+            if(stairsChecking) {
+                sendDataToServer("走路")
+            }
+            return
+        }
         var location:CLLocation? = locationManager?.location?
         if(location==nil){
             return
@@ -103,24 +115,14 @@ class MotionManager: NSObject {
         
         relAltitudeQueue!.append(self.currentAltitudeData!.relativeAltitude.floatValue)  //把目前的氣壓資料加入Queue
         locationQueue!.append(location!.coordinate) // 把目前coordinate加入Queue
-
-        var activityString:String = getActivityString() as String
-        if(activityString == "")  {
-            removeQueueFirstElement()
-            if(stairsChecking) {
-                sendDataToServer(location, activity: activityString)
-            }
-            return
-        }
-        
+     
         if(location?.horizontalAccuracy>=10){ // GPS精確度>10m，可能在室內，精確度太低，不取資料
             removeQueueFirstElement()
             if(stairsChecking) {
-                sendDataToServer(location, activity: activityString)
+                sendDataToServer(activityString!)
             }
             return  //這次氣壓計變化不取，這次function會在此停止
         }
-//        println(relAltitudeQueue!)
             if(!stairsChecking) {
                 var count = relAltitudeQueue!.count
                 if(count<4) {
@@ -131,7 +133,7 @@ class MotionManager: NSObject {
                 var lastTwo:Float = relAltitudeQueue![count-2] as Float  //抓倒數第二個
                 var last:Float = relAltitudeQueue!.last! as Float  //抓最後面的
                 var compare:Float = abs(last-lastTwo)+abs(lastThree-lastTwo)+abs(lastFour-lastThree)
-                if(compare>1.1)  {
+                if(compare>1.2)  {
                     stairsChecking = true
                 }else{
                     removeQueueFirstElement()
@@ -144,11 +146,11 @@ class MotionManager: NSObject {
                 if(abs(last-lastTwo)+abs(lastThree-lastTwo)<0.6)    {// 最後兩次變化 < 0.6m 當作 樓梯已結束
                     removeQueueLastElement()
                     removeQueueLastElement()
-                    sendDataToServer(location, activity: activityString)
+                    sendDataToServer(activityString!)
                 }
             }
     }
-    func sendDataToServer(var location:CLLocation?,var activity:String) {
+    func sendDataToServer(var activity:String) {
         var first:Float = relAltitudeQueue!.first! as Float  //抓最前面的
         var last:Float = relAltitudeQueue!.last! as Float  //抓最後面的
         

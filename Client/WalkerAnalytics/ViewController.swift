@@ -16,6 +16,7 @@ import AVFoundation
 class ViewController: UITabBarController,CLLocationManagerDelegate,MKMapViewDelegate {
     var locationManager:CLLocationManager?
     var motionManager:MotionManager?
+    var acceleroManager:CMMotionManager?
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -34,10 +35,6 @@ class ViewController: UITabBarController,CLLocationManagerDelegate,MKMapViewDele
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
         
-        if !CMAltimeter.isRelativeAltitudeAvailable() {
-            var alert:UIAlertView = UIAlertView(title: "您的裝置不支援樓梯探測", message: "只能提供路況報導 無法提供資料分析", delegate: nil, cancelButtonTitle: "確定")
-            alert.show()
-        }
     }
     func initLocationManaer(){
         locationManager = CLLocationManager()
@@ -57,14 +54,12 @@ class ViewController: UITabBarController,CLLocationManagerDelegate,MKMapViewDele
         if (status==CLAuthorizationStatus.Authorized || status==CLAuthorizationStatus.AuthorizedWhenInUse)  {
            locationManager!.startUpdatingLocation()
             locationManager!.startMonitoringSignificantLocationChanges()
-            locationManager!.startUpdatingHeading()
         }
     }
     func locationManager(manager: CLLocationManager!, didUpdateLocations locations: [AnyObject]!) {
         var location =  locations.first as CLLocation
         NSNotificationCenter.defaultCenter().postNotificationName("accuracyChange", object: location)
     }
- 
     
 
 }

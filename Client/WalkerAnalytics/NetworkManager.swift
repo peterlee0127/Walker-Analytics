@@ -34,7 +34,6 @@ class NetworkManager: NSObject {
         httpManager.requestSerializer = AFHTTPRequestSerializer()
         httpManager.POST(saveMotionURL, parameters: dictionary, success: { (operation, reponseObject) -> Void in
             
-            
             }, failure: { (operation, error) -> Void in
                 println(error)
         })
