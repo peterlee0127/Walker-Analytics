@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="6250" systemVersion="14B25" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6244"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="SettingViewController" customModule="WalkerAnalytics" customModuleProvider="target">
+            <connections>
+                <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT">
+            <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="L4L-GX-A2J">
+                    <rect key="frame" x="263" y="158" width="75" height="30"/>
+                    <state key="normal" title="樓梯已結束">
+                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                    </state>
+                    <connections>
+                        <action selector="endStairs" destination="-1" eventType="touchDown" id="ImS-KV-jHP"/>
+                    </connections>
+                </button>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xhV-f1-gbf">
+                    <rect key="frame" x="263" y="102" width="75" height="30"/>
+                    <state key="normal" title="前方有樓梯">
+                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                    </state>
+                    <connections>
+                        <action selector="startStairs" destination="-1" eventType="touchDown" id="inM-Mj-lm6"/>
+                    </connections>
+                </button>
+            </subviews>
+            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+            <constraints>
+                <constraint firstItem="xhV-f1-gbf" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="3Zy-dM-YeF"/>
+                <constraint firstItem="L4L-GX-A2J" firstAttribute="leading" secondItem="xhV-f1-gbf" secondAttribute="leading" id="IcN-wa-V1j"/>
+                <constraint firstItem="L4L-GX-A2J" firstAttribute="top" secondItem="xhV-f1-gbf" secondAttribute="bottom" constant="26" id="JPv-f8-pAA"/>
+                <constraint firstItem="xhV-f1-gbf" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="102" id="TfE-nZ-6Dc"/>
+            </constraints>
+        </view>
+    </objects>
+</document>
