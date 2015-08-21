@@ -40,8 +40,8 @@ class ViewController: UITabBarController,CLLocationManagerDelegate,MKMapViewDele
         locationManager = CLLocationManager()
         locationManager!.delegate = self
         locationManager!.desiredAccuracy = kCLLocationAccuracyBest
-        locationManager!.requestWhenInUseAuthorization()
         locationManager!.requestAlwaysAuthorization()
+        locationManager!.requestWhenInUseAuthorization()
         locationManager!.activityType = CLActivityType.Fitness
         locationManager!.distanceFilter = kCLDistanceFilterNone
     }
@@ -51,13 +51,13 @@ class ViewController: UITabBarController,CLLocationManagerDelegate,MKMapViewDele
        motionManager!.startTrackingMotion()
     }
     func locationManager(manager: CLLocationManager!, didChangeAuthorizationStatus status: CLAuthorizationStatus) {
-        if (status==CLAuthorizationStatus.Authorized || status==CLAuthorizationStatus.AuthorizedWhenInUse)  {
+        if (status == CLAuthorizationStatus.AuthorizedAlways || status == CLAuthorizationStatus.AuthorizedWhenInUse)  {
            locationManager!.startUpdatingLocation()
             locationManager!.startMonitoringSignificantLocationChanges()
         }
     }
     func locationManager(manager: CLLocationManager!, didUpdateLocations locations: [AnyObject]!) {
-        var location =  locations.first as CLLocation
+        var location =  locations.first as! CLLocation
         NSNotificationCenter.defaultCenter().postNotificationName("accuracyChange", object: location)
     }
     

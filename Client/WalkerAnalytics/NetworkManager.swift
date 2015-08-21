@@ -30,7 +30,7 @@ class NetworkManager: NSObject {
     func sendData(dict:Dictionary<String,AnyObject>){
         var dictionary:NSDictionary = dict as NSDictionary
         var httpManager = AFHTTPRequestOperationManager()
-        httpManager.responseSerializer.acceptableContentTypes = httpManager.responseSerializer.acceptableContentTypes.setByAddingObject("text/html")
+        httpManager.responseSerializer.acceptableContentTypes = NSSet(object: "text/html") as Set<NSObject>
         httpManager.requestSerializer = AFHTTPRequestSerializer()
         httpManager.POST(saveMotionURL, parameters: dictionary, success: { (operation, reponseObject) -> Void in
             
@@ -43,11 +43,11 @@ class NetworkManager: NSObject {
     func getAnalytics() {
     
         var manager:AFHTTPRequestOperationManager = AFHTTPRequestOperationManager()
-        manager.responseSerializer.acceptableContentTypes = NSSet(object: "application/json")
+        manager.responseSerializer.acceptableContentTypes = NSSet(object: "application/json") as Set<NSObject>
         manager.responseSerializer = AFJSONResponseSerializer()
         manager.GET(AnalyticsURL, parameters: nil, success: { (operation: AFHTTPRequestOperation!,responseObject: AnyObject!) in
             
-            var result:Array<[String:AnyObject]> = responseObject as Array<[String:AnyObject]>
+            var result:Array<[String:AnyObject]> = responseObject as! Array<[String:AnyObject]>
             self.delegate!.downloadComplete!(result)
             
         }, failure: { (operation, error) -> Void in

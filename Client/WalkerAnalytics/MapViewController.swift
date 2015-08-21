@@ -41,13 +41,13 @@ class MapViewController: UIViewController,CLLocationManagerDelegate,MKMapViewDel
     func downloadComplete(data: Array<[String : AnyObject]>!) {
         for(var i=0;i<data!.count;i++) {
             var temp:[String:AnyObject] = data![i] as [String:AnyObject]
-            var leng:Array<String> = temp["altitudeLog"]! as Array<String>
+            var leng:Array<String> = temp["altitudeLog"]! as! Array<String>
             for(var j=0;j<leng.count;j++) {
-                    var lat = temp["latitude"]! as Array<String>
-                    var lon = temp["longitude"]! as Array<String>
+                    var lat = temp["latitude"]! as! Array<String>
+                    var lon = temp["longitude"]! as! Array<String>
                     var latitude = lat[j].toDouble()!
                     var longitude = lon[j].toDouble()!
-                    var radius = temp["horizontalAccuracy"]! as Int
+                    var radius = temp["horizontalAccuracy"]! as! Int
                     var circle:MKCircle = MKCircle(centerCoordinate: CLLocationCoordinate2DMake(latitude,longitude), radius:Double(radius))
                 mapView!.addOverlay(circle)
               
@@ -68,7 +68,7 @@ class MapViewController: UIViewController,CLLocationManagerDelegate,MKMapViewDel
         }
     }
     func accuracyChange(noti:NSNotification) {
-        var location:CLLocation = noti.object as CLLocation
+        var location:CLLocation = noti.object as! CLLocation
         accuracyLabel!.text = String(format: "%.1fm", location.horizontalAccuracy)
     }
     override func preferredStatusBarStyle() -> UIStatusBarStyle {

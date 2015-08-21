@@ -77,10 +77,10 @@ class MotionManager: NSObject {
     func getActivityString() ->String? {
         if(self.activityData != nil){
             if(self.activityData!.walking)  {
-//                reStartLocationManager()
+//                restartLocationManager()
                 return "走路"
             }else if(self.activityData!.running){
-//                reStartLocationManager()
+//                restartLocationManager()
                 return nil   //不取資料
             }
             else {
@@ -91,7 +91,7 @@ class MotionManager: NSObject {
             return nil
         }
     }
-    func reStartLocationManager() {
+    func restartLocationManager() {
         locationManager!.startMonitoringSignificantLocationChanges()
         locationManager!.startUpdatingLocation()
     }
@@ -101,14 +101,14 @@ class MotionManager: NSObject {
     }
     func altitudeDidChange(){   //每次氣壓計Sensor取得新資料，約1s 跑一次此function
         var activityString:String? = getActivityString() as String?
-        if(activityString?==nil)  {
+        if(activityString == nil)  {
             removeQueueFirstElement()
             if(stairsChecking) {
                 sendDataToServer("走路")
             }
             return
         }
-        var location:CLLocation? = locationManager?.location?
+        var location:CLLocation? = locationManager?.location
         if(location==nil){
             return
         }
