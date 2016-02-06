@@ -57,8 +57,8 @@ class MotionManager: NSObject {
     }
     func startTrackingMotion(){
         if CMAltimeter.isRelativeAltitudeAvailable() {
-            altimeter!.startRelativeAltitudeUpdatesToQueue(NSOperationQueue.mainQueue(), withHandler: {  (data:CMAltitudeData!, error) in
-                if error == nil {
+            altimeter!.startRelativeAltitudeUpdatesToQueue(NSOperationQueue.mainQueue(), withHandler: {  (data:CMAltitudeData?, error) in
+                if error == nil && data != nil {
                   self.currentAltitudeData = data
                 }
             })
@@ -68,8 +68,10 @@ class MotionManager: NSObject {
         
         }
         if CMMotionActivityManager.isActivityAvailable() {
-            activityManager!.startActivityUpdatesToQueue(NSOperationQueue(), withHandler: { (activity:CMMotionActivity!) -> Void in
-                self.activityData = activity
+            activityManager!.startActivityUpdatesToQueue(NSOperationQueue(), withHandler: { (activity:CMMotionActivity?) -> Void in
+                    if activity != nil {
+                        self.activityData = activity
+                    }
                 })       // activity block end
         }
         
@@ -100,7 +102,7 @@ class MotionManager: NSObject {
         locationManager!.stopUpdatingLocation()
     }
     func altitudeDidChange(){   //每次氣壓計Sensor取得新資料，約1s 跑一次此function
-        var activityString:String? = getActivityString() as String?
+        let activityString:String? = getActivityString() as String?
         if(activityString == nil)  {
             removeQueueFirstElement()
             if(stairsChecking) {
@@ -108,7 +110,7 @@ class MotionManager: NSObject {
             }
             return
         }
-        var location:CLLocation? = locationManager?.location
+        let location:CLLocation? = locationManager?.location
         if(location==nil){
             return
         }
@@ -124,25 +126,25 @@ class MotionManager: NSObject {
             return  //這次氣壓計變化不取，這次function會在此停止
         }
             if(!stairsChecking) {
-                var count = relAltitudeQueue!.count
+                let count = relAltitudeQueue!.count
                 if(count<4) {
                     return
                 }
-                var lastFour:Float = relAltitudeQueue![count-4] as Float
-                var lastThree:Float = relAltitudeQueue![count-3] as Float  //抓倒數第三個
-                var lastTwo:Float = relAltitudeQueue![count-2] as Float  //抓倒數第二個
-                var last:Float = relAltitudeQueue!.last! as Float  //抓最後面的
-                var compare:Float = abs(last-lastTwo)+abs(lastThree-lastTwo)+abs(lastFour-lastThree)
+                let lastFour:Float = relAltitudeQueue![count-4] as Float
+                let lastThree:Float = relAltitudeQueue![count-3] as Float  //抓倒數第三個
+                let lastTwo:Float = relAltitudeQueue![count-2] as Float  //抓倒數第二個
+                let last:Float = relAltitudeQueue!.last! as Float  //抓最後面的
+                let compare:Float = abs(last-lastTwo)+abs(lastThree-lastTwo)+abs(lastFour-lastThree)
                 if(compare>1.2)  {
                     stairsChecking = true
                 }else{
                     removeQueueFirstElement()
                 }   // check
             }else {
-                var count = relAltitudeQueue!.count
-                var lastThree:Float = relAltitudeQueue![count-3] as Float  //抓倒數第三個
-                var lastTwo:Float = relAltitudeQueue![count-2] as Float  //抓倒數第二個
-                var last:Float = relAltitudeQueue!.last! as Float  //抓最後面的
+                let count = relAltitudeQueue!.count
+                let lastThree:Float = relAltitudeQueue![count-3] as Float  //抓倒數第三個
+                let lastTwo:Float = relAltitudeQueue![count-2] as Float  //抓倒數第二個
+                let last:Float = relAltitudeQueue!.last! as Float  //抓最後面的
                 if(abs(last-lastTwo)+abs(lastThree-lastTwo)<0.6)    {// 最後兩次變化 < 0.6m 當作 樓梯已結束
                     removeQueueLastElement()
                     removeQueueLastElement()
@@ -151,10 +153,10 @@ class MotionManager: NSObject {
             }
     }
     func sendDataToServer(var activity:String) {
-        var first:Float = relAltitudeQueue!.first! as Float  //抓最前面的
-        var last:Float = relAltitudeQueue!.last! as Float  //抓最後面的
+        let first:Float = relAltitudeQueue!.first! as Float  //抓最前面的
+        let last:Float = relAltitudeQueue!.last! as Float  //抓最後面的
         
-        var date:NSDate = NSDate() //取得現在時間
+        let date:NSDate = NSDate() //取得現在時間
         var floorIsAscended = "-1"
         if(first>=last) {
             floorIsAscended = "0"   //下樓
@@ -169,7 +171,7 @@ class MotionManager: NSObject {
             longitudeArr.append(Float(loc.longitude))
         }
         
-        var dict:Dictionary<String,AnyObject> = [
+        let dict:Dictionary<String,AnyObject> = [
             "algorithmVer":"0",
             "latitude":latitudeArr,
             "longitude":longitudeArr,

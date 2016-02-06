@@ -2,4 +2,4 @@ platform :ios, '8.0'
 use_frameworks!
 
 target 'WalkerAnalytics'
-pod 'AFNetworking'
+pod 'Alamofire'

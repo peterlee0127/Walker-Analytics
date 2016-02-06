@@ -22,11 +22,11 @@ class SettingViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     @IBAction func startStairs() {
-        var speak:SpeakerManager = SpeakerManager.sharedInstance
+        let speak:SpeakerManager = SpeakerManager.sharedInstance
         speak.say("前方有樓梯，請小心行走")
     }
     @IBAction func endStairs() {
-        var speak:SpeakerManager = SpeakerManager.sharedInstance
+        let speak:SpeakerManager = SpeakerManager.sharedInstance
         speak.say("即將離開樓梯區域")
     }
     override func preferredStatusBarStyle() -> UIStatusBarStyle {

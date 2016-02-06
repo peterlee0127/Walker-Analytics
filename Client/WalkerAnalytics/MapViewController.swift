@@ -41,14 +41,14 @@ class MapViewController: UIViewController,CLLocationManagerDelegate,MKMapViewDel
     func downloadComplete(data: Array<[String : AnyObject]>!) {
         for(var i=0;i<data!.count;i++) {
             var temp:[String:AnyObject] = data![i] as [String:AnyObject]
-            var leng:Array<String> = temp["altitudeLog"]! as! Array<String>
+            let leng:Array<String> = temp["altitudeLog"]! as! Array<String>
             for(var j=0;j<leng.count;j++) {
                     var lat = temp["latitude"]! as! Array<String>
                     var lon = temp["longitude"]! as! Array<String>
-                    var latitude = lat[j].toDouble()!
-                    var longitude = lon[j].toDouble()!
-                    var radius = temp["horizontalAccuracy"]! as! Int
-                    var circle:MKCircle = MKCircle(centerCoordinate: CLLocationCoordinate2DMake(latitude,longitude), radius:Double(radius))
+                    let latitude = lat[j].toDouble()!
+                    let longitude = lon[j].toDouble()!
+                    let radius = temp["horizontalAccuracy"]! as! Int
+                    let circle:MKCircle = MKCircle(centerCoordinate: CLLocationCoordinate2DMake(latitude,longitude), radius:Double(radius))
                 mapView!.addOverlay(circle)
               
             }
@@ -56,9 +56,9 @@ class MapViewController: UIViewController,CLLocationManagerDelegate,MKMapViewDel
         
         
     }
-    func mapView(mapView: MKMapView!, rendererForOverlay overlay: MKOverlay!) -> MKOverlayRenderer! {
+    func mapView(mapView: MKMapView, rendererForOverlay overlay: MKOverlay) -> MKOverlayRenderer! {
         if overlay is MKCircle {
-            var circle = MKCircleRenderer(overlay: overlay)
+            let circle = MKCircleRenderer(overlay: overlay)
             circle.strokeColor = UIColor.redColor()
             circle.fillColor = UIColor(red: 255, green: 0, blue: 0, alpha: 0.1)
             circle.lineWidth = 1
@@ -68,7 +68,7 @@ class MapViewController: UIViewController,CLLocationManagerDelegate,MKMapViewDel
         }
     }
     func accuracyChange(noti:NSNotification) {
-        var location:CLLocation = noti.object as! CLLocation
+        let location:CLLocation = noti.object as! CLLocation
         accuracyLabel!.text = String(format: "%.1fm", location.horizontalAccuracy)
     }
     override func preferredStatusBarStyle() -> UIStatusBarStyle {

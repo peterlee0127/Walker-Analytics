@@ -23,10 +23,10 @@ class ViewController: UITabBarController,CLLocationManagerDelegate,MKMapViewDele
         initLocationManaer()
         initMotionManager()
         
-        var mapVC:MapViewController = MapViewController(nibName:"MapViewController",bundle:nil)
+        let mapVC:MapViewController = MapViewController(nibName:"MapViewController",bundle:nil)
         mapVC.tabBarItem.title = "地圖"
         
-        var settingVC:SettingViewController = SettingViewController(nibName:"SettingViewController",bundle:nil)
+        let settingVC:SettingViewController = SettingViewController(nibName:"SettingViewController",bundle:nil)
         settingVC.tabBarItem.title = "設定"
         
         setViewControllers([mapVC,settingVC], animated: true)
@@ -50,14 +50,14 @@ class ViewController: UITabBarController,CLLocationManagerDelegate,MKMapViewDele
        motionManager!.locationManager = locationManager!
        motionManager!.startTrackingMotion()
     }
-    func locationManager(manager: CLLocationManager!, didChangeAuthorizationStatus status: CLAuthorizationStatus) {
+    func locationManager(manager: CLLocationManager, didChangeAuthorizationStatus status: CLAuthorizationStatus) {
         if (status == CLAuthorizationStatus.AuthorizedAlways || status == CLAuthorizationStatus.AuthorizedWhenInUse)  {
            locationManager!.startUpdatingLocation()
             locationManager!.startMonitoringSignificantLocationChanges()
         }
     }
-    func locationManager(manager: CLLocationManager!, didUpdateLocations locations: [AnyObject]!) {
-        var location =  locations.first as! CLLocation
+    func locationManager(manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+        var location =  locations.first 
         NSNotificationCenter.defaultCenter().postNotificationName("accuracyChange", object: location)
     }
     

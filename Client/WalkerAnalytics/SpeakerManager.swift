@@ -28,7 +28,7 @@ class SpeakerManager: NSObject {
     }
     func say(text:String){
         if(!speechSyn!.speaking) {
-            var utt:AVSpeechUtterance = AVSpeechUtterance(string:text)
+            let utt:AVSpeechUtterance = AVSpeechUtterance(string:text)
 //            utt.voice = AVSpeechSynthesisVoice(language: "zh-TW")
             utt.rate = 0.01
             
