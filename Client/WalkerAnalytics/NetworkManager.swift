@@ -9,8 +9,9 @@
 import UIKit
 import Alamofire
 
-let saveMotionURL = "http://petertku.no-ip.org/saveMotionData"
-let AnalyticsURL = "http://petertku.no-ip.org/getAllList"
+let host = "localhost"
+let saveMotionURL = "http://\(host)/saveMotionData"
+let AnalyticsURL = "http://\(host)/getAllList"
 
 @objc protocol NetworkManagerDelegate {
     optional func downloadComplete(data:Array<[String:AnyObject]>!)
@@ -29,19 +30,18 @@ class NetworkManager: NSObject {
         return Static.instance!
     }
     func sendData(dict:Dictionary<String,AnyObject>){
-        var httpManager = Alamofire.request(.POST, saveMotionURL, parameters: dict, encoding: ParameterEncoding.JSON, headers: nil)
-    
+        Alamofire.request(.POST, saveMotionURL, parameters: dict, encoding: ParameterEncoding.JSON, headers: nil)
     }
     func getAnalytics() {
-        var httpManager = Alamofire.request(.GET, AnalyticsURL, parameters: nil, encoding: ParameterEncoding.JSON, headers: nil).responseString {
+        Alamofire.request(.GET, AnalyticsURL, parameters: nil, encoding: ParameterEncoding.JSON, headers: nil).responseJSON(completionHandler: {
             response in
             if response.result.isSuccess {
                 if let res = response.result.value as? [[String:AnyObject]] {
                     self.delegate!.downloadComplete!(res)
                 }
             }
-        }
-        
+        })
+            
         
     }
 }
