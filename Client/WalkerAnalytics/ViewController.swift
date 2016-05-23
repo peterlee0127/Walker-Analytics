@@ -57,7 +57,7 @@ class ViewController: UITabBarController,CLLocationManagerDelegate,MKMapViewDele
         }
     }
     func locationManager(manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
-        var location =  locations.first 
+        let location =  locations.first 
         NSNotificationCenter.defaultCenter().postNotificationName("accuracyChange", object: location)
     }
     

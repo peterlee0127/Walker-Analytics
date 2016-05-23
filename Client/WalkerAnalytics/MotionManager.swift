@@ -152,7 +152,7 @@ class MotionManager: NSObject {
                 }
             }
     }
-    func sendDataToServer(var activity:String) {
+    func sendDataToServer( activity:String) {
         let first:Float = relAltitudeQueue!.first! as Float  //抓最前面的
         let last:Float = relAltitudeQueue!.last! as Float  //抓最後面的
         

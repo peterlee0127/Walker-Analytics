@@ -28,7 +28,8 @@ class MapViewController: UIViewController,CLLocationManagerDelegate,MKMapViewDel
         networkManager = NetworkManager.sharedInstance
         networkManager!.delegate = self
         networkManager!.getAnalytics()
-        
+       
+        CLLocationManager().requestWhenInUseAuthorization()
         
         mapView!.setRegion(MKCoordinateRegionMakeWithDistance(
             CLLocationCoordinate2DMake(25.175358,121.449864), 1500, 1500), animated: false)
@@ -39,10 +40,10 @@ class MapViewController: UIViewController,CLLocationManagerDelegate,MKMapViewDel
         // Do any additional setup after loading the view.
     }
     func downloadComplete(data: Array<[String : AnyObject]>!) {
-        for(var i=0;i<data!.count;i++) {
+        for(var i=0;i<data!.count;i += 1) {
             var temp:[String:AnyObject] = data![i] as [String:AnyObject]
             let leng:Array<String> = temp["altitudeLog"]! as! Array<String>
-            for(var j=0;j<leng.count;j++) {
+            for(var j=0;j<leng.count;j += 1) {
                     var lat = temp["latitude"]! as! Array<String>
                     var lon = temp["longitude"]! as! Array<String>
                     let latitude = lat[j].toDouble()!
@@ -56,16 +57,14 @@ class MapViewController: UIViewController,CLLocationManagerDelegate,MKMapViewDel
         
         
     }
-    func mapView(mapView: MKMapView, rendererForOverlay overlay: MKOverlay) -> MKOverlayRenderer! {
-        if overlay is MKCircle {
+    func mapView(mapView: MKMapView, rendererForOverlay overlay: MKOverlay) -> MKOverlayRenderer {
+//        if overlay is MKCircle {
             let circle = MKCircleRenderer(overlay: overlay)
             circle.strokeColor = UIColor.redColor()
             circle.fillColor = UIColor(red: 255, green: 0, blue: 0, alpha: 0.1)
             circle.lineWidth = 1
             return circle
-        } else {
-            return nil
-        }
+//        }
     }
     func accuracyChange(noti:NSNotification) {
         let location:CLLocation = noti.object as! CLLocation
