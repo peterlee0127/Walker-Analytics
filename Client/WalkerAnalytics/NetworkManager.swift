@@ -9,7 +9,7 @@
 import UIKit
 import Alamofire
 
-let host = "localhost"
+let host = "peterlee0127:8888"
 let saveMotionURL = "http://\(host)/saveMotionData"
 let AnalyticsURL = "http://\(host)/getAllList"
 

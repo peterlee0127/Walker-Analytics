@@ -31,12 +31,12 @@ class MapViewController: UIViewController,CLLocationManagerDelegate,MKMapViewDel
        
         CLLocationManager().requestWhenInUseAuthorization()
         
-        mapView!.setRegion(MKCoordinateRegionMakeWithDistance(
-            CLLocationCoordinate2DMake(25.175358,121.449864), 1500, 1500), animated: false)
+//        mapView!.setRegion(MKCoordinateRegionMakeWithDistance(
+//            CLLocationCoordinate2DMake(25.175358,121.449864), 1500, 1500), animated: false)
         mapView!.pitchEnabled = true
         mapView!.delegate = self
         
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: "accuracyChange:", name: "accuracyChange", object: nil)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(MapViewController.accuracyChange(_:)), name: "accuracyChange", object: nil)
         // Do any additional setup after loading the view.
     }
     func downloadComplete(data: Array<[String : AnyObject]>!) {
