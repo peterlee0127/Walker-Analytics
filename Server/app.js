@@ -22,10 +22,6 @@ app.use(methodOverride());
 app.use(express.static(path.join(__dirname, 'public/javascript')));
 
 app.use(helmet.xssFilter());
-app.use(helmet.xframe());
-app.use(helmet.nosniff());
-app.use(helmet.ienoopen());
-app.use(helmet.nocache());
 app.disable('x-powered-by');
 
 // No need csrf

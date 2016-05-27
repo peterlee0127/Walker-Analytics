@@ -16,7 +16,7 @@
 						"morgan":"",
 						"ejs": "*",
 						"apn":"",
-						"mongoose" : "3.8.*",
+						"mongoose" : "",
 						"connect-mongo" : "*",
 						"mongodb": "",
 						"csurf":"",
